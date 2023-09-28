@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,9 +10,9 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY = os.getenv("SECRET_KEY", default="my_secret_key")
-SECRET_KEY = "ns6(14uyb7kn3q10kkz+=y8#k!g$$+qhs)ho+6^nzy=9xoru3g"
+SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -59,11 +60,15 @@ WSGI_APPLICATION = "leyan.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.postgresql"),
+        "ENGINE": os.getenv(
+            "DB_ENGINE", default="django.db.backends.postgresql"
+        ),
         "NAME": os.getenv("DB_NAME", default="postgres"),
         "USER": os.getenv("POSTGRES_USER", default="postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
-        "HOST": os.getenv("DB_HOST", default="db"),
+        "HOST": os.getenv(
+            "DB_HOST", default="localhost"
+        ),  # потом надо не забыть поменять на db
         "PORT": os.getenv("DB_PORT", default="5432"),
     }
 }
@@ -83,13 +88,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "ru"
+LANGUAGE_CODE = "ru-ru"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "/static/admin/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static/admin")
+STATIC_URL = "back-static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "back-static")
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "back-media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "back-media")
