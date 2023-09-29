@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "api.apps.ApiConfig",
-    "users.apps.UsersConfig",
+    # "users.apps.UsersConfig",
+    "product.apps.ProductConfig",
 ]
 
 MIDDLEWARE = [
@@ -76,10 +77,12 @@ WSGI_APPLICATION = "leyan.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv("DB_ENGINE"),
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "ENGINE": os.getenv(
+            "DB_ENGINE", default="django.db.backends.postgresql"
+        ),
+        "NAME": os.getenv("DB_NAME", default="postgres"),
+        "USER": os.getenv("POSTGRES_USER", default="postgres"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
         "HOST": os.getenv(
             "DB_HOST", default="localhost"
         ),  # потом надо не забыть поменять на db
@@ -114,7 +117,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "back-static")
 MEDIA_URL = "back-media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "back-media")
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MAX_EMAIL_LENGTH = 255
 MAX_PASSWORD_LENGTH = 150
