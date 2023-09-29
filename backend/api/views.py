@@ -1,4 +1,5 @@
-# from django.shortcuts import render
+from rest_framework import viewsets
+
 from api.serializers import (
     CategorySerializer,
     ForecastProductSerializer,
@@ -13,7 +14,6 @@ from product.models import (
     SaleProduct,
     ShopsProduct,
 )
-from rest_framework import viewsets
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
