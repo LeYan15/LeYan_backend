@@ -80,7 +80,7 @@ http://127.0.0.1:8000/swagger/
 
 **DS**:
 - Киселев Владимир ([@vks1v](https://t.me/vks1v), **[vkslv](https://github.com/vkslv)**)
-- Шабров Роман ([@Ekwizor](https://t.me/Ekwizor), **[...](https://github.com/...)**)
+- Шабров Роман ([@Ekwizor](https://t.me/Ekwizor), **[ekwizor](https://github.com/ekwizor)**)
 - Шапиев Магомед ([@ShaurMau](https://t.me/ShaurMau), **[MagomedShapiev](https://github.com/MagomedShapiev)**)
 
 **Backend-разработчики**:
