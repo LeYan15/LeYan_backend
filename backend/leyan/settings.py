@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "api.apps.ApiConfig",
-    # "users.apps.UsersConfig",
     "product.apps.ProductConfig",
+    "forecast.apps.ForecastConfig",
+    "sale.apps.SaleConfig",
+    "shop.apps.ShopConfig",
 ]
 
 MIDDLEWARE = [
@@ -119,5 +121,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "back-media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MAX_EMAIL_LENGTH = 255
-MAX_PASSWORD_LENGTH = 150
+
+# Константы моделей ----------------------------
+# ----------------------------------------------
+
+MAX_LENGTH = 150
+MAX_DIGITS = 19
+DECIMAL_PLACES = 10
+
+UOM_CHOICES = [(1, "ШТ"), (17, "ВЕС")]
+FLAG_CHOICES = [(0, "НЕТ"), (1, "ДА")]
+
+GET_ONLY_LIST = "GET только для списка."
