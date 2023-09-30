@@ -44,7 +44,7 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-4. Создайте в директории `infra` файл `.env` с переменными окружения для работы 
+4. Создайте в директории `infra` файл `.env` с переменными окружения для работы
 с БД по примеру файла `.env.sample`
 
 5. Создайте и проведите миграции в приложении Django
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 python manage.py makemigrations && python manage.py migrate
 ```
 
-6. 
+6.
 
 
 7. Запускаем приложение:
@@ -99,7 +99,7 @@ http://localhost/swagger/
 
 **DS**:
 - Киселев Владимир ([@vks1v](https://t.me/vks1v), **[vkslv](https://github.com/vkslv)**)
-- Шабров Роман ([@Ekwizor](https://t.me/Ekwizor), **[...](https://github.com/...)**)
+- Шабров Роман ([@Ekwizor](https://t.me/Ekwizor), **[ekwizor](https://github.com/ekwizor)**)
 - Шапиев Магомед ([@ShaurMau](https://t.me/ShaurMau), **[MagomedShapiev](https://github.com/MagomedShapiev)**)
 
 **Backend-разработчики**:
