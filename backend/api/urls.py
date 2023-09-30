@@ -2,7 +2,6 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
-    CategoriesViewSet,
     ForecastViewSet,
     ProductViewSet,
     SalesViewSet,
@@ -14,9 +13,8 @@ app_name = "api"
 router = DefaultRouter()
 
 router.register("product", ProductViewSet, basename="product")
-router.register("categories", CategoriesViewSet, basename="categories")
-router.register("sales", SalesViewSet, basename="sales")
-router.register("shops", ShopsViewSet, basename="shops")
+router.register("sale", SalesViewSet, basename="sale")
+router.register("shop", ShopsViewSet, basename="shop")
 router.register("forecast", ForecastViewSet, basename="forecast")
 
 urlpatterns = [

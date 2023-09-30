@@ -24,6 +24,7 @@ jobs:
         echo '[flake8]' > setup.cfg
         echo 'ignore =' >> setup.cfg
         echo '    I001' >> setup.cfg
+        echo '    I003' >> setup.cfg
         echo '    I004' >> setup.cfg
         echo '    I005' >> setup.cfg
         echo 'per-file-ignores =' >> setup.cfg

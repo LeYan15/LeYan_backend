@@ -1,62 +1,75 @@
+from django.conf import settings
 from django.db import models
 
 
-class NameModel(models.Model):
-    name = models.CharField("Название", unique=True, max_length=255)
+class Group(models.Model):
+
+    group_id = models.CharField(
+        "id группы", max_length=settings.MAX_LENGTH, primary_key=True
+    )
 
     class Meta:
-        abstract = True
+        verbose_name = "Группа"
+        verbose_name_plural = "Группы"
 
     def __str__(self):
-        return self.name
+        return str(self.group_id)
 
 
-class Group(NameModel):
-    pass
+class Category(models.Model):
+
+    cat_id = models.CharField(
+        "id категории товара", max_length=settings.MAX_LENGTH, primary_key=True
+    )
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+    def __str__(self):
+        return str(self.cat_id)
 
 
-class Category(NameModel):
-    pass
+class SubCategory(models.Model):
+
+    subcat_id = models.CharField(
+        "id подкатегории товара",
+        max_length=settings.MAX_LENGTH,
+        primary_key=True,
+    )
+
+    class Meta:
+        verbose_name = "Подкатегория"
+        verbose_name_plural = "Подкатегории"
+
+    def __str__(self):
+        return str(self.subcat_id)
 
 
-class SubCategory(NameModel):
-    pass
+class Product(models.Model):
 
-
-class Product(NameModel):
+    sku = models.CharField(
+        "id товара", max_length=settings.MAX_LENGTH, primary_key=True
+    )
     group = models.ForeignKey(
-        Group,
-        on_delete=models.CASCADE,
+        Group, on_delete=models.SET_NULL, related_name="products", null=True
     )
     category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
+        Category, on_delete=models.SET_NULL, related_name="products", null=True
     )
     subcategory = models.ForeignKey(
         SubCategory,
-        on_delete=models.CASCADE,
-    )
-    # quantity =
-
-
-class ChartProduct(models.Model):
-    product = models.ForeignKey(
-        Product,
         on_delete=models.SET_NULL,
+        related_name="products",
         null=True,
+    )
+    uom = models.PositiveSmallIntegerField(
+        "маркер продажи на вес", choices=settings.UOM_CHOICES
     )
 
     class Meta:
-        abstract = True
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
 
-
-class SaleProduct(ChartProduct):
-    pass
-
-
-class ShopsProduct(ChartProduct):
-    pass
-
-
-class ForecastProduct(ChartProduct):
-    pass
+    def __str__(self):
+        return str(self.sku)
