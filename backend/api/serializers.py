@@ -1,7 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
 
-
 from product.models import Product
 from forecast.models import Forecast
 from sale.models import Sale
@@ -14,30 +13,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ForecastPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Forecast
-        fields = "__all__"
-
-
-class ForecastGetSerializer(serializers.ModelSerializer):
-
-    store = serializers.CharField(source="store.store")
-    sku = serializers.CharField(source="product.sku")
-    forecast = serializers.DictField(source="forecast.sales_units")
-
-    class Meta:
-        model = Forecast
-        fields = "__all__"
-
-
 class SaleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Sale
-        fields = "__all__"
-
-
-class SaleGroupSerializer(serializers.ModelSerializer):
 
     store = serializers.StringRelatedField(source="shop.store")
     sku = serializers.StringRelatedField(source="product.sku")
@@ -48,11 +24,9 @@ class SaleGroupSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_fact(self, obj):
-        shop = obj.shop
-        product = obj.product
+        sales = Sale.objects.filter(shop=obj.shop, product=obj.product)
         date_start = self.context.get("date_start")
         date_end = self.context.get("date_end")
-        sales = Sale.objects.filter(shop=shop, product=product)
         if date_start and date_end:
             sales = sales.filter(date__range=(date_start, date_end))
         sales_serializer = SaleSerializer(sales, many=True)
@@ -68,7 +42,7 @@ class FactSerializer(serializers.ModelSerializer):
     sales_rub = serializers.DecimalField(
         settings.MAX_DIGITS, settings.DECIMAL_PLACES
     )
-    sales_run_promo = serializers.DecimalField(
+    sales_rub_promo = serializers.DecimalField(
         settings.MAX_DIGITS, settings.DECIMAL_PLACES
     )
 
@@ -87,37 +61,6 @@ class SaleFactSerializer(serializers.ModelSerializer):
         model = Sale
         fields = "__all__"
 
-    def create(self, validated_data):
-        store = Shop.objects.get(store=validated_data.get("store"))
-        sku = Product.objects.get(sku=validated_data.get("sku"))
-        fact = validated_data.get("fact")
-        for f in fact:
-            if Sale.objects.filter(
-                shop=store, product=sku, date=f["date"]
-            ).exists():
-                Sale.objects.filter(
-                    shop=store, product=sku, date=f["date"]
-                ).update(
-                    sales_type=f["sales_type"],
-                    sales_units=f["sales_units"],
-                    sales_units_promo=f["sales_units_promo"],
-                    sales_rub=f["sales_rub"],
-                    sales_run_promo=f["sales_run_promo"],
-                )
-            else:
-                Sale.objects.create(
-                    shop=store,
-                    product=sku,
-                    date=f["date"],
-                    sales_type=f["sales_type"],
-                    sales_units=f["sales_units"],
-                    sales_units_promo=f["sales_units_promo"],
-                    sales_rub=f["sales_rub"],
-                    sales_run_promo=f["sales_run_promo"],
-                )
-
-        return validated_data
-
 
 class ShopSerializer(serializers.ModelSerializer):
 
@@ -131,4 +74,21 @@ class ShopSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shop
+        fields = "__all__"
+
+
+class ForecastPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Forecast
+        fields = "__all__"
+
+
+class ForecastGetSerializer(serializers.ModelSerializer):
+
+    store = serializers.CharField(source="store.store")
+    sku = serializers.CharField(source="product.sku")
+    forecast = serializers.DictField(source="forecast.sales_units")
+
+    class Meta:
+        model = Forecast
         fields = "__all__"

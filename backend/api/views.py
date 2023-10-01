@@ -1,9 +1,7 @@
-from django.conf import settings
 from rest_framework import (
     viewsets,
     status,
     response,
-    exceptions,
     decorators,
     permissions,
 )
@@ -14,7 +12,7 @@ from api.serializers import (
     ShopSerializer,
     ProductSerializer,
     SaleFactSerializer,
-    SaleGroupSerializer,
+    SaleSerializer,
 )
 from api.filters import ShopFilter, ProductFilter
 from api.paginations import LimitPageNumberPagination
@@ -42,13 +40,10 @@ class ShopsViewSet(viewsets.ReadOnlyModelViewSet):
 class SalesViewSet(viewsets.ModelViewSet):
 
     queryset = Sale.objects.all()
-    serializer_class = SaleGroupSerializer
+    serializer_class = SaleSerializer
     permission_classes = (permissions.AllowAny,)
     http_method_names = ["get", "post"]
     pagination_class = LimitPageNumberPagination
-
-    def retrieve(self, request):
-        raise exceptions.MethodNotAllowed("GET", detail=settings.GET_ONLY_LIST)
 
     def get_serializer(self):
         if self.action == "create":
@@ -95,15 +90,12 @@ class ForecastViewSet(viewsets.ModelViewSet):
     queryset = Forecast.objects.all()
     http_method_names = ["get", "post"]
 
-    def retrieve(self, request):
-        raise exceptions.MethodNotAllowed("GET", detail=settings.GET_ONLY_LIST)
-
     def get_serializer(self):
         if self.action == "create":
             return ForecastPostSerializer
         return ForecastGetSerializer
 
-    def list(self, request):
+    def get_list(self, request):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return response.Response({"data": serializer.data})

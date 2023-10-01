@@ -22,7 +22,7 @@ class Sale(models.Model):
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
     )
-    sales_run_promo = models.DecimalField(
+    sales_rub_promo = models.DecimalField(
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
     )
