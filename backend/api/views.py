@@ -1,24 +1,30 @@
 from rest_framework import (
-    viewsets,
-    # status,
-    # response,
-    # decorators,
     permissions,
-)
+    viewsets,
+)  # status,; response,; decorators,
 
+from api.filters import ProductFilter, ShopFilter, UserFilter
+from api.paginations import LimitPageNumberPagination
 from api.serializers import (
     ForecastGetSerializer,
     ForecastPostSerializer,
-    ShopSerializer,
     ProductSerializer,
     SaleSerializer,
+    ShopSerializer,
+    UserSerializer,
 )
-from api.filters import ShopFilter, ProductFilter
-from api.paginations import LimitPageNumberPagination
-from product.models import Product
 from forecast.models import Forecast
+from product.models import Product
 from sale.models import Sale
 from shop.models import Shop
+from users.models import User
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filterset_class = UserFilter
+    pagination_class = LimitPageNumberPagination
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):

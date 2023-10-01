@@ -16,7 +16,7 @@ class City(models.Model):
 
 class Division(models.Model):
 
-    division_id = models.CharField(max_length=settings.MAX_LENGTH)
+    division_id = models.CharField(max_length=settings.MAX_LENGTH, default=0)
 
     class Meta:
         verbose_name = "Подразделение"
@@ -40,7 +40,7 @@ class Format(models.Model):
 
 class Location(models.Model):
 
-    loc_id = models.IntegerField()
+    loc_id = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = "Локация"
@@ -52,7 +52,7 @@ class Location(models.Model):
 
 class Size(models.Model):
 
-    size_id = models.IntegerField()
+    size_id = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = "Размер"
