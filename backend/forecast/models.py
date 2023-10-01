@@ -13,15 +13,19 @@ class Forecast(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="forecast"
     )
-    forecast_date = models.DateField("Дата начала прогноза")
-    forecast = JSONField("Прогноз на 14 дней", default=dict)
+    forecast_date = models.DateField()
+    forecast = JSONField(default=dict)
 
     class Meta:
         verbose_name = "Прогноз продаж"
         verbose_name_plural = "Прогнозы продаж"
         constraints = [
             models.UniqueConstraint(
-                fields=["store", "forecast_date", "product"],
+                fields=(
+                    "store",
+                    "forecast_date",
+                    "product",
+                ),
                 name="unique_forecast",
             ),
         ]
