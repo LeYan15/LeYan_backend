@@ -41,7 +41,6 @@ class SalesViewSet(viewsets.ModelViewSet):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
     permission_classes = (permissions.AllowAny,)
-    http_method_names = ["get", "post"]
     pagination_class = LimitPageNumberPagination
 
 
