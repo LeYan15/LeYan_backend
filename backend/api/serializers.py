@@ -24,13 +24,7 @@ class SaleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_fact(self, obj):
-        sales = Sale.objects.filter(shop=obj.shop, product=obj.product)
-        date_start = self.context.get("date_start")
-        date_end = self.context.get("date_end")
-        if date_start and date_end:
-            sales = sales.filter(date__range=(date_start, date_end))
-        sales_serializer = SaleSerializer(sales, many=True)
-        return sales_serializer.data
+        pass
 
 
 class FactSerializer(serializers.ModelSerializer):
