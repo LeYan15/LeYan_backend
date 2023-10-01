@@ -13,7 +13,7 @@ class Forecast(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="forecast"
     )
-    forecast_date = models.DateField("Дата начала прогноза")
+    forecast_date = models.DateField("Дата прогноза")
     forecast = JSONField("Прогноз на 14 дней", default=dict)
 
     class Meta:
