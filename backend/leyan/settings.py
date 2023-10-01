@@ -133,6 +133,7 @@ UOM_CHOICES = [(1, "ШТ"), (17, "ВЕС")]
 FLAG_CHOICES = [(0, "НЕТ"), (1, "ДА")]
 
 GET_ONLY_LIST = "GET только для списка."
+
 MAX_EMAIL_LENGTH = 255
 MAX_PASSWORD_LENGTH = 150
 MAX_USERNAME_LENGTH = 150
