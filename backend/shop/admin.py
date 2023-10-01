@@ -13,8 +13,8 @@ class CityAdmin(admin.ModelAdmin):
 @admin.register(Division)
 class DivisionAdmin(admin.ModelAdmin):
 
-    list_display = ("division_code_id",)
-    search_fields = ("division_code_id",)
+    list_display = ("division_id",)
+    search_fields = ("division_id",)
     empty_value_display = "--пусто--"
 
 
@@ -29,16 +29,16 @@ class FormatAdmin(admin.ModelAdmin):
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
 
-    list_display = ("type_loc_id",)
-    search_fields = ("type_loc_id",)
+    list_display = ("loc_id",)
+    search_fields = ("loc_id",)
     empty_value_display = "--пусто--"
 
 
 @admin.register(Size)
 class SizeAdmin(admin.ModelAdmin):
 
-    list_display = ("type_size_id",)
-    search_fields = ("type_size_id",)
+    list_display = ("size_id",)
+    search_fields = ("size_id",)
     empty_value_display = "--пусто--"
 
 

@@ -16,14 +16,14 @@ class City(models.Model):
 
 class Division(models.Model):
 
-    division_code_id = models.CharField(max_length=settings.MAX_LENGTH)
+    division_id = models.CharField(max_length=settings.MAX_LENGTH)
 
     class Meta:
         verbose_name = "Подразделение"
         verbose_name_plural = "Подразделения"
 
     def __str__(self):
-        return str(self.division_code_id)
+        return str(self.division_id)
 
 
 class Format(models.Model):
@@ -40,26 +40,26 @@ class Format(models.Model):
 
 class Location(models.Model):
 
-    type_loc_id = models.IntegerField()
+    loc_id = models.IntegerField()
 
     class Meta:
         verbose_name = "Локация"
         verbose_name_plural = "Локации"
 
     def __str__(self):
-        return str(self.type_loc_id)
+        return str(self.loc_id)
 
 
 class Size(models.Model):
 
-    type_size_id = models.IntegerField()
+    size_id = models.IntegerField()
 
     class Meta:
         verbose_name = "Размер"
         verbose_name_plural = "Размеры"
 
     def __str__(self):
-        return str(self.type_size_id)
+        return str(self.size_id)
 
 
 class Shop(models.Model):
