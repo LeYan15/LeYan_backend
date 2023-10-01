@@ -13,8 +13,8 @@ class CityAdmin(admin.ModelAdmin):
 @admin.register(Division)
 class DivisionAdmin(admin.ModelAdmin):
 
-    list_display = ("division_code_id",)
-    search_fields = ("division_code_id",)
+    list_display = ("division_id",)
+    search_fields = ("division_id",)
     empty_value_display = "--пусто--"
 
 

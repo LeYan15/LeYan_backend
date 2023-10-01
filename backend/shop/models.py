@@ -16,7 +16,7 @@ class City(models.Model):
 
 class Division(models.Model):
 
-    division_code_id = models.CharField(max_length=settings.MAX_LENGTH)
+    division_id = models.CharField(max_length=settings.MAX_LENGTH)
 
     class Meta:
         verbose_name = "Подразделение"
