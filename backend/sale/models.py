@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db import models
-from shop.models import Shop
+
 from product.models import Product
+from shop.models import Shop
 
 
 class Sale(models.Model):
@@ -25,6 +26,7 @@ class Sale(models.Model):
     sales_rub_promo = models.DecimalField(
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
+        default=0,
     )
 
     class Meta:
