@@ -7,38 +7,34 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-max_password_length = settings.MAX_PASSWORD_LENGTH
-max_email_length = settings.MAX_EMAIL_LENGTH
-max_username_length = settings.MAX_USERNAME_LENGTH
-
 
 class User(AbstractUser):
     username = models.CharField(
         verbose_name="Логин",
-        max_length=max_username_length,
+        max_length=settings.MAX_USERNAME_LENGTH,
         unique=True,
-        help_text=(f"Максимум {max_username_length} символов."),
+        help_text=(f"Максимум {settings.MAX_USERNAME_LENGTH} символов."),
     )
     password = models.CharField(
         verbose_name=_("Пароль"),
-        max_length=max_password_length,
-        help_text=(f"Максимум {max_password_length} символов."),
+        max_length=settings.MAX_PASSWORD_LENGTH,
+        help_text=(f"Максимум {settings.MAX_PASSWORD_LENGTH} символов."),
     )
     email = models.EmailField(
         verbose_name="Адрес электронной почты",
-        max_length=max_email_length,
+        max_length=settings.MAX_EMAIL_LENGTH,
         unique=True,
-        help_text=(f"Максимум {max_email_length} символов."),
+        help_text=(f"Максимум {settings.MAX_PASSWORD_LENGTH} символов."),
     )
     first_name = models.CharField(
         verbose_name="Имя",
-        max_length=max_username_length,
-        help_text=(f"Максимум {max_username_length} символов."),
+        max_length=settings.MAX_USERNAME_LENGTH,
+        help_text=(f"Максимум {settings.MAX_USERNAME_LENGTH} символов."),
     )
     last_name = models.CharField(
         verbose_name="Фамилия",
-        max_length=max_username_length,
-        help_text=(f"Максимум {max_username_length} символов."),
+        max_length=settings.MAX_USERNAME_LENGTH,
+        help_text=(f"Максимум {settings.MAX_USERNAME_LENGTH} символов."),
     )
     active = models.BooleanField(
         verbose_name="Активирован",
