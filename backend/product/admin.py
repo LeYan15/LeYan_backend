@@ -1,3 +1,4 @@
+# backend/product/admin.py
 from django.contrib import admin
 
 from product.models import Category, Group, Product, SubCategory
