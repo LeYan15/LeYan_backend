@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "djoser",
     "drf_yasg",
     "api.apps.ApiConfig",
     "product.apps.ProductConfig",
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
     "shop.apps.ShopConfig",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -80,8 +82,8 @@ WSGI_APPLICATION = "leyan.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": os.getenv(
-            "DB_ENGINE"  # , default="django.db.backends.postgresql"
-        ),
+            "DB_ENGINE"
+        ),  # , default="django.db.backends.postgresql"
         "NAME": os.getenv("DB_NAME", default="postgres"),
         "USER": os.getenv("POSTGRES_USER", default="postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
@@ -91,6 +93,8 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", default="5432"),
     }
 }
+
+AUTH_USER_MODEL = "users.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -132,7 +136,6 @@ DECIMAL_PLACES = 10
 UOM_CHOICES = [(1, "ШТ"), (17, "ВЕС")]
 FLAG_CHOICES = [(0, "НЕТ"), (1, "ДА")]
 
-GET_ONLY_LIST = "GET только для списка."
 MAX_EMAIL_LENGTH = 255
 MAX_PASSWORD_LENGTH = 150
 MAX_USERNAME_LENGTH = 150

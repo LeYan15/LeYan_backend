@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db import models
-from shop.models import Shop
+
 from product.models import Product
+from shop.models import Shop
 
 
 class Sale(models.Model):
@@ -12,23 +13,20 @@ class Sale(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="sale"
     )
-    date = models.DateField("дата")
+    date = models.DateField()
     sales_type = models.PositiveSmallIntegerField(
-        "флаг наличия промо", choices=settings.FLAG_CHOICES
+        choices=settings.FLAG_CHOICES
     )
-    sales_units = models.PositiveSmallIntegerField("продажи без промо в шт")
-    sales_units_promo = models.PositiveSmallIntegerField(
-        "продажи c промо в шт"
-    )
+    sales_units = models.PositiveSmallIntegerField()
+    sales_units_promo = models.PositiveSmallIntegerField()
     sales_rub = models.DecimalField(
-        "продажи в рублях без промо",
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
     )
-    sales_run_promo = models.DecimalField(
-        "продажи в рублях промо",
+    sales_rub_promo = models.DecimalField(
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
+        default=0,
     )
 
     class Meta:
@@ -36,7 +34,4 @@ class Sale(models.Model):
         verbose_name_plural = "Продажи"
 
     def __str__(self):
-        return (
-            f"Sales: Shop ID - {self.shop.store}, "
-            f"Product SKU - {self.product.sku}"
-        )
+        return f"Shop id {self.shop.store}, " f"SKU {self.product.sku}"
