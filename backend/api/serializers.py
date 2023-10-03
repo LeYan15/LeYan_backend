@@ -61,12 +61,12 @@ class SaleFactSerializer(serializers.ModelSerializer):
 class ShopSerializer(serializers.ModelSerializer):
 
     city = serializers.ReadOnlyField(source="city.city_id")
-    division = serializers.ReadOnlyField(source="division.division_code_id")
+    division = serializers.ReadOnlyField(source="division.division_id")
     type_format = serializers.ReadOnlyField(
         source="type_format.type_format_id"
     )
-    loc = serializers.ReadOnlyField(source="loc.type_loc_id")
-    size = serializers.ReadOnlyField(source="size.type_size_id")
+    loc = serializers.ReadOnlyField(source="loc.loc_id")
+    size = serializers.ReadOnlyField(source="size.size_id")
 
     class Meta:
         model = Shop
