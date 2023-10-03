@@ -1,14 +1,14 @@
-import os
 import csv
 import logging
+import os
 
 from django.conf import settings
 from django.core.management import BaseCommand
 
 from backend.api.manage.logger import init_logger
 from backend.product.models import Product
-from backend.shop.models import Shop
 from backend.sale.models import Sale
+from backend.shop.models import Shop
 
 init_logger("command")
 logger = logging.getLogger("command.parse_sales")

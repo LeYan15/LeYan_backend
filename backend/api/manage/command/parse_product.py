@@ -1,12 +1,12 @@
-import os
 import csv
 import logging
+import os
 
 from django.conf import settings
 from django.core.management import BaseCommand
 
 from backend.api.manage.logger import init_logger
-from backend.product.models import Product, Group, Category, SubCategory
+from backend.product.models import Category, Group, Product, SubCategory
 
 init_logger("command")
 logger = logging.getLogger("command.parse_product")
