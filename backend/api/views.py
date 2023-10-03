@@ -24,6 +24,7 @@ from users.models import User
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.AllowAny,)
     filterset_class = UserFilter
     pagination_class = LimitPageNumberPagination
 
