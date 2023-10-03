@@ -1,5 +1,4 @@
 # backend/api/serializers.py
-from django.conf import settings
 from rest_framework import serializers
 
 from forecast.models import Forecast
@@ -16,10 +15,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SaleSerializer(serializers.ModelSerializer):
-
-    store = serializers.StringRelatedField(source="shop.store")
-    sku = serializers.StringRelatedField(source="product.sku")
-    fact = serializers.SerializerMethodField(method_name="get_fact")
+    store = serializers.ReadOnlyField(source="shop.store")
+    sku = serializers.ReadOnlyField(source="product.sku")
+    fact = serializers.SerializerMethodField()
 
     class Meta:
         model = Sale
@@ -30,28 +28,22 @@ class SaleSerializer(serializers.ModelSerializer):
 
 
 class FactSerializer(serializers.ModelSerializer):
-
-    date = serializers.DateField()
-    sales_type = serializers.IntegerField()
-    sales_units = serializers.IntegerField()
-    sales_units_promo = serializers.IntegerField()
-    sales_rub = serializers.DecimalField(
-        settings.MAX_DIGITS, settings.DECIMAL_PLACES
-    )
-    sales_rub_promo = serializers.DecimalField(
-        settings.MAX_DIGITS, settings.DECIMAL_PLACES
-    )
-
     class Meta:
         model = Sale
-        fields = "__all__"
+        fields = [
+            "date",
+            "sales_type",
+            "sales_units",
+            "sales_units_promo",
+            "sales_rub",
+            "sales_rub_promo",
+        ]
 
 
 class SaleFactSerializer(serializers.ModelSerializer):
-
     store = serializers.CharField()
     sku = serializers.CharField()
-    fact = serializers.ListField(child=FactSerializer())
+    fact = FactSerializer(many=True)
 
     class Meta:
         model = Sale
@@ -59,7 +51,6 @@ class SaleFactSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
-
     city = serializers.ReadOnlyField(source="city.city_id")
     division = serializers.ReadOnlyField(source="division.division_id")
     type_format = serializers.ReadOnlyField(
@@ -74,7 +65,6 @@ class ShopSerializer(serializers.ModelSerializer):
 
 
 class ForecastPostSerializer(serializers.ModelSerializer):
-
     store = serializers.CharField(source="store.store")
     forecast = serializers.DictField()
 
@@ -84,7 +74,6 @@ class ForecastPostSerializer(serializers.ModelSerializer):
 
 
 class ForecastGetSerializer(serializers.ModelSerializer):
-
     store = serializers.CharField(source="store.store")
     sku = serializers.CharField(source="product.sku")
     forecast = serializers.DictField(source="forecast.sales_units")
@@ -97,15 +86,9 @@ class ForecastGetSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ["email", "username", "first_name", "last_name", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data: dict) -> User:
-        user = User(
-            email=validated_data["email"],
-            username=validated_data["username"],
-            first_name=validated_data["first_name"],
-            last_name=validated_data["last_name"],
-        )
-        user.set_password(validated_data["password"])
-        user.save()
+        user = User.objects.create_user(**validated_data)
         return user

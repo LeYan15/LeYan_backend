@@ -3,6 +3,8 @@ from rest_framework import (
     permissions,
     viewsets,
 )  # status,; response,; decorators,
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from api.filters import ProductFilter, ShopFilter, UserFilter
 from api.paginations import LimitPageNumberPagination
@@ -56,7 +58,14 @@ class ForecastViewSet(viewsets.ModelViewSet):
     queryset = Forecast.objects.all()
     http_method_names = ["get", "post"]
 
-    def get_serializer(self):
-        if self.action == "create":
-            return ForecastPostSerializer
-        return ForecastGetSerializer
+    @action(detail=False, methods=["get"])
+    def get_forecast(self, request):
+        serializer = ForecastGetSerializer(self.queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["post"])
+    def create_forecast(self, request):
+        serializer = ForecastPostSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=201)

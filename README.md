@@ -89,12 +89,14 @@ python manage.py loaddata ingredients.json
 python manage.py createsuperuser
 ```
 
-## Адрес админки проекта (запускаетя локально)
+## Адрес админки проекта
+(запускается локально)
 ```
 http://127.0.0.1:8000/admin/
 ```
 
-## Адрес проекта (запускаетя локально)
+## Адрес проекта
+(запускается локально)
 ```
 http://127.0.0.1:8000/
 ```
@@ -115,8 +117,11 @@ get, /forecast # Возвращает спрогнозированные зна�
 
 ### Команда проекта
 
+**Проджект**:
+- Алёна Станиславская ([@helena_stanislavskaya ](https://t.me/@helena_stanislavskaya))
+
 **Дизайнеры**:
-- Малеева Евгения ([@eugenia_maleeva](https://t.me/eugenia_maleeva), **[...](https://github.com/...)**)
+- Малеева Евгения ([@eugenia_maleeva](https://t.me/eugenia_maleeva), **[Eugenia-mei](https://github.com/Eugenia-mei)**)
 - Токарский Илья ([@tokarsky_ilya](https://t.me/tokarsky_ilya), **[marolfox](https://github.com/marolfox)**)
 - Черкасова Лола ([@lola_cherkasovaa](https://t.me/lola_cherkasovaa), **[...](https://github.com/...)**)
 
