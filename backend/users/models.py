@@ -1,4 +1,3 @@
-# backend/users/models.py
 import re
 import unicodedata
 

@@ -15,9 +15,7 @@ class Sale(models.Model):
         Product, on_delete=models.CASCADE, related_name="sale"
     )
     date = models.DateField()
-    sales_type = models.PositiveSmallIntegerField(
-        choices=settings.FLAG_CHOICES
-    )
+    sales_type = models.PositiveSmallIntegerField(choices=settings.FLAG)
     sales_units = models.PositiveSmallIntegerField()
     sales_units_promo = models.PositiveSmallIntegerField()
     sales_rub = models.DecimalField(

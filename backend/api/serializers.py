@@ -74,6 +74,10 @@ class ShopSerializer(serializers.ModelSerializer):
 
 
 class ForecastPostSerializer(serializers.ModelSerializer):
+
+    store = serializers.CharField(source="store.store")
+    forecast = serializers.DictField()
+
     class Meta:
         model = Forecast
         fields = "__all__"
