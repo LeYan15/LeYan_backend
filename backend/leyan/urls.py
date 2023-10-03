@@ -1,4 +1,3 @@
-# backend/leyan/urls.py
 from django.contrib import admin
 from django.urls import include, path, re_path
 from drf_yasg import openapi
@@ -12,6 +11,9 @@ schema_view = get_schema_view(
         description="API documentation",
         license=openapi.License(name="BSD License"),
     ),
+    patterns=[
+        path("api/", include("api.urls")),
+    ],
     public=True,
     permission_classes=(permissions.AllowAny,),
 )

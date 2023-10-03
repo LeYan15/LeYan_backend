@@ -60,9 +60,7 @@ class Product(models.Model):
         related_name="products",
         null=True,
     )
-    uom = models.PositiveSmallIntegerField(
-        "ед. изм.", choices=settings.UOM_CHOICES
-    )
+    uom = models.IntegerField("ед. изм.", choices=settings.UOM)
 
     class Meta:
         verbose_name = "Продукт"

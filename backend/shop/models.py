@@ -80,7 +80,7 @@ class Shop(models.Model):
     size = models.ForeignKey(
         Size, on_delete=models.SET_NULL, related_name="shop", null=True
     )
-    is_active = models.PositiveSmallIntegerField(choices=settings.FLAG_CHOICES)
+    is_active = models.PositiveSmallIntegerField(choices=settings.FLAG)
 
     class Meta:
         verbose_name = "Магазин"

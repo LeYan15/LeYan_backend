@@ -82,7 +82,7 @@ WSGI_APPLICATION = "leyan.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": os.getenv(
-            "DB_ENGINE"
+            "DB_ENGINE", default="django.db.backends.postgresql"
         ),  # , default="django.db.backends.postgresql"
         "NAME": os.getenv("DB_NAME", default="postgres"),
         "USER": os.getenv("POSTGRES_USER", default="postgres"),
@@ -133,8 +133,8 @@ MAX_LENGTH = 150
 MAX_DIGITS = 19
 DECIMAL_PLACES = 10
 
-UOM_CHOICES = [(1, "ШТ"), (17, "ВЕС")]
-FLAG_CHOICES = [(0, "НЕТ"), (1, "ДА")]
+UOM = [(1, "шт."), (17, "вес")]
+FLAG = [(0, "нет"), (1, "да")]
 
 MAX_EMAIL_LENGTH = 255
 MAX_PASSWORD_LENGTH = 150

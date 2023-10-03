@@ -13,7 +13,7 @@ app_name = "api"
 
 router = DefaultRouter()
 
-router.register("user", UserViewSet, basename="user")
+router.register("users", UserViewSet, basename="users")
 router.register("product", ProductViewSet, basename="product")
 router.register("sale", SalesViewSet, basename="sale")
 router.register("shop", ShopsViewSet, basename="shop")
