@@ -20,7 +20,7 @@ def init_logger(name):
     sh.addFilter(password_filter)
 
     fh = logging.handlers.RotatingFileHandler(
-        filename="backend/api/loggs/logs/test.log"
+        filename="backend/api/logs/test.log"
     )
     fh.setFormatter(logging.Formatter(FORMAT))
     fh.setLevel(logging.DEBUG)
