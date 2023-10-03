@@ -1,3 +1,4 @@
+# backend/shop/apps.py
 from django.apps import AppConfig
 
 
