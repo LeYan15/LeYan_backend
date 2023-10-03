@@ -14,7 +14,7 @@ logger = logging.getLogger("command.parse_product")
 
 class Command(BaseCommand):
 
-    help = "python manage.py pars_product"
+    help = "python manage.py parse_product"
 
     def handle(self, *args, **options):
 
