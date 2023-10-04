@@ -1,4 +1,4 @@
-![leyan_workflow](https://github.com/Karina-Rin/leyan_backend/workflows/leyan_workflow.yml/badge.svg)
+![leyan_workflow](https://github.com/Karina-Rin/LeYan_backend/workflows/leyan_workflow.yml/badge.svg)
 
 # ...
 
