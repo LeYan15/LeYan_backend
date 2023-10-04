@@ -1,4 +1,3 @@
-# backend/forecast/admin.py
 from django.contrib import admin
 
 from forecast.models import Forecast

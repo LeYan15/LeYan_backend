@@ -136,6 +136,16 @@ DECIMAL_PLACES = 10
 UOM = [(1, "шт."), (17, "вес")]
 FLAG = [(0, "нет"), (1, "да")]
 
+# Парсер
+HELP_TEXT_PARSER = "Загрузка данных из {} файла."
+DELETE_TEXT_PARSER = "Удаление данных из {} файла."
+
+DATA_DIR = "data/{}"
+DATA_DELETE = "Данные {} удалены."
+DATA_UPLOADED = "Данные {} уже загружены."
+DATA_LOAD_IN_FILE = "Загрузка данных из {} завершена."
+OPTIONS_DELETE = "delete"
+
 MAX_EMAIL_LENGTH = 255
 MAX_PASSWORD_LENGTH = 150
 MAX_USERNAME_LENGTH = 150

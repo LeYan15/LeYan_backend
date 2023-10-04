@@ -1,4 +1,3 @@
-# backend/product/models.py
 from django.conf import settings
 from django.db import models
 
@@ -47,7 +46,7 @@ class SubCategory(models.Model):
 class Product(models.Model):
 
     sku = models.CharField(
-        "артикул", max_length=settings.MAX_LENGTH, primary_key=True
+        "Артикул", max_length=settings.MAX_LENGTH, primary_key=True
     )
     group = models.ForeignKey(
         Group, on_delete=models.SET_NULL, related_name="products", null=True
@@ -61,7 +60,7 @@ class Product(models.Model):
         related_name="products",
         null=True,
     )
-    uom = models.IntegerField("ед. изм.", choices=settings.UOM)
+    uom = models.IntegerField("Ед. изм.", choices=settings.UOM)
 
     class Meta:
         verbose_name = "Продукт"
