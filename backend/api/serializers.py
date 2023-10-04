@@ -1,4 +1,3 @@
-# backend/api/serializers.py
 from rest_framework import serializers
 
 from forecast.models import Forecast
