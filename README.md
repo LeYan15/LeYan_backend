@@ -1,4 +1,6 @@
-# Хакатон.Лента
+![leyan_workflow](https://github.com/Karina-Rin/leyan_backend/workflows/leyan_workflow.yml/badge.svg)
+
+# ...
 
 ## Описание проекта
 Интерфейс прогноза спроса на 14 дней для товаров собственного производства с использованием гранулярности ТК-SKU-День.
