@@ -54,11 +54,9 @@ class Command(BaseCommand):
                 next(reader)
 
                 for row in reader:
-                    group = Group.objects.get_or_create(group_id=row[1])[0]
-                    cat = Category.objects.get_or_create(cat_id=row[2])[0]
-                    subcat = SubCategory.objects.get_or_create(
-                        subcat_id=row[3]
-                    )[0]
+                    group = Group.objects.get_or_create(name=row[1])[0]
+                    cat = Category.objects.get_or_create(name=row[2])[0]
+                    subcat = SubCategory.objects.get_or_create(name=row[3])[0]
                     Product.objects.get_or_create(
                         sku=row[0],
                         group=group,

@@ -2,45 +2,33 @@ from django.conf import settings
 from django.db import models
 
 
-class Group(models.Model):
+class NameModel(models.Model):
 
-    group_id = models.CharField(
-        max_length=settings.MAX_LENGTH, primary_key=True
-    )
+    name = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
 
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class Group(NameModel):
     class Meta:
         verbose_name = "Группа"
         verbose_name_plural = "Группы"
 
-    def __str__(self):
-        return str(self.group_id)
 
-
-class Category(models.Model):
-
-    cat_id = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
-
+class Category(NameModel):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
-    def __str__(self):
-        return str(self.cat_id)
 
-
-class SubCategory(models.Model):
-
-    subcat_id = models.CharField(
-        max_length=settings.MAX_LENGTH,
-        primary_key=True,
-    )
-
+class SubCategory(NameModel):
     class Meta:
         verbose_name = "Подкатегория"
         verbose_name_plural = "Подкатегории"
-
-    def __str__(self):
-        return self.subcat_id
 
 
 class Product(models.Model):
