@@ -21,7 +21,6 @@ load_dotenv()
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = os.getenv("SECRET_KEY", default="my_secret_key")
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 DEBUG = True
@@ -38,15 +37,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "djoser",
-    "drf_yasg",
     "api.apps.ApiConfig",
     "product.apps.ProductConfig",
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
     "shop.apps.ShopConfig",
     "users.apps.UsersConfig",
+    "rest_framework",
+    "djoser",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -112,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "ru-ru"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
