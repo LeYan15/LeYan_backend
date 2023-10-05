@@ -9,7 +9,7 @@
 При изготовлении товаров СП сотрудники будут ориентироваться не на экспертный подход, а на ML прогноз спроса, в соответствии с которым будут изготавливать продукцию и планировать заказы сырья.
 
 ## Стек технологий
-![Python](https://img.shields.io/badge/Python-3.11-blue) ![Django](https://img.shields.io/badge/Django-3.2-green) ![DRF](https://img.shields.io/badge/DRF-3.12-orange) ![Swagger API](https://img.shields.io/badge/Swagger-API-green2) ![Docker](https://img.shields.io/badge/Docker-blue) ![Jinja2](https://img.shields.io/badge/Jinja2-3.1.2-red) ![Flask](https://img.shields.io/badge/Flask-2.3.3-cyan) ![React](https://img.shields.io/badge/React-teal) ![Vite](https://img.shields.io/badge/Vite-blue_violet)
+![Python](https://img.shields.io/badge/Python-3.11-blue) ![Django](https://img.shields.io/badge/Django-3.2-green) ![DRF](https://img.shields.io/badge/DRF-3.12-orange) ![Swagger API](https://img.shields.io/badge/Swagger-API-green2) ![Docker](https://img.shields.io/badge/Docker-blue) ![Jinja2](https://img.shields.io/badge/Jinja2-3.1.2-red) ![Flask](https://img.shields.io/badge/Flask-2.3.3-cyan) ![React](https://img.shields.io/badge/React-teal) ![Vite](https://img.shields.io/badge/Vite-blue_violet) ![DjDT](https://img.shields.io/badge/DjDT-4.2.0-gold)
 
 ## Инструкция по сборке и запуску
 1. Склонируйте репозиторий и перейдите в него:
