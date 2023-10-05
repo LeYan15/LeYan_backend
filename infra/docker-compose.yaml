@@ -7,10 +7,8 @@ services:
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
     env_file:
-      - ../.env
+      - ./.env
 
   web:
     image: karinarin/leyan
@@ -36,7 +34,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ../.env
+      - ./.env
 
   # frontend:
   #   image: frontend:latest
