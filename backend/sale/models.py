@@ -14,9 +14,9 @@ class Sale(models.Model):
         Product, on_delete=models.CASCADE, related_name="sale"
     )
     date = models.DateField()
-    sales_type = models.PositiveSmallIntegerField(choices=settings.FLAG)
-    sales_units = models.PositiveSmallIntegerField()
-    sales_units_promo = models.PositiveSmallIntegerField()
+    sales_type = models.IntegerField(choices=settings.FLAG)
+    sales_units = models.IntegerField()
+    sales_units_promo = models.IntegerField()
     sales_rub = models.DecimalField(
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
@@ -24,12 +24,8 @@ class Sale(models.Model):
     sales_rub_promo = models.DecimalField(
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
-        default=0,
     )
 
     class Meta:
         verbose_name = "Продажи"
         verbose_name_plural = "Продажи"
-
-    def __str__(self):
-        return f"Shop id {self.shop.store}, " f"SKU {self.product.sku}"

@@ -2,69 +2,73 @@ from django.conf import settings
 from django.db import models
 
 
-class City(models.Model):
+class NameCharModel(models.Model):
 
-    city_id = models.CharField(max_length=settings.MAX_LENGTH)
+    name = models.CharField(max_length=settings.MAX_LENGTH)
 
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class City(NameCharModel):
     class Meta:
         verbose_name = "Город"
         verbose_name_plural = "Города"
 
-    def __str__(self):
-        return str(self.city_id)
 
-
-class Division(models.Model):
-
-    division_id = models.CharField(max_length=settings.MAX_LENGTH, default=0)
-
+class Division(NameCharModel):
     class Meta:
         verbose_name = "Подразделение"
         verbose_name_plural = "Подразделения"
 
     def __str__(self):
-        return str(self.division_id)
+        return str(self.name)
 
 
-class Format(models.Model):
+class NameIntModel(models.Model):
 
-    type_format_id = models.IntegerField()
+    name = models.IntegerField()
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class Format(NameIntModel):
+
+    name = models.IntegerField()
 
     class Meta:
         verbose_name = "Формат"
         verbose_name_plural = "Форматы"
 
-    def __str__(self):
-        return str(self.type_format_id)
 
+class Location(NameIntModel):
 
-class Location(models.Model):
-
-    loc_id = models.IntegerField(default=0)
+    name = models.IntegerField()
 
     class Meta:
         verbose_name = "Локация"
         verbose_name_plural = "Локации"
 
-    def __str__(self):
-        return str(self.loc_id)
 
+class Size(NameIntModel):
 
-class Size(models.Model):
-
-    size_id = models.IntegerField(default=0)
+    name = models.IntegerField()
 
     class Meta:
         verbose_name = "Размер"
         verbose_name_plural = "Размеры"
 
-    def __str__(self):
-        return str(self.size_id)
-
 
 class Shop(models.Model):
 
-    store = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
+    shop = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
     city = models.ForeignKey(
         City, on_delete=models.SET_NULL, related_name="shop", null=True
     )
@@ -80,11 +84,11 @@ class Shop(models.Model):
     size = models.ForeignKey(
         Size, on_delete=models.SET_NULL, related_name="shop", null=True
     )
-    is_active = models.PositiveSmallIntegerField(choices=settings.FLAG)
+    is_active = models.IntegerField(choices=settings.FLAG)
 
     class Meta:
         verbose_name = "Магазин"
         verbose_name_plural = "Магазины"
 
     def __str__(self):
-        return str(self.store)
+        return self.shop

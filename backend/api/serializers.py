@@ -14,7 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SaleSerializer(serializers.ModelSerializer):
-    store = serializers.ReadOnlyField(source="shop.store")
+    shop = serializers.ReadOnlyField(source="shop.shop")
     sku = serializers.ReadOnlyField(source="product.sku")
     fact = serializers.SerializerMethodField()
 
@@ -40,7 +40,7 @@ class FactSerializer(serializers.ModelSerializer):
 
 
 class SaleFactSerializer(serializers.ModelSerializer):
-    store = serializers.CharField()
+    shop = serializers.CharField()
     sku = serializers.CharField()
     fact = FactSerializer(many=True)
 
@@ -50,13 +50,11 @@ class SaleFactSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
-    city = serializers.ReadOnlyField(source="city.city_id")
-    division = serializers.ReadOnlyField(source="division.division_id")
-    type_format = serializers.ReadOnlyField(
-        source="type_format.type_format_id"
-    )
-    loc = serializers.ReadOnlyField(source="loc.loc_id")
-    size = serializers.ReadOnlyField(source="size.size_id")
+    city = serializers.ReadOnlyField(source="city.name")
+    division = serializers.ReadOnlyField(source="division.name")
+    type_format = serializers.ReadOnlyField(source="type_format.name")
+    loc = serializers.ReadOnlyField(source="loc.name")
+    size = serializers.ReadOnlyField(source="size.name")
 
     class Meta:
         model = Shop
@@ -64,7 +62,7 @@ class ShopSerializer(serializers.ModelSerializer):
 
 
 class ForecastPostSerializer(serializers.ModelSerializer):
-    store = serializers.CharField(source="store.store")
+    shop = serializers.CharField(source="shop.shop")
     forecast = serializers.DictField()
 
     class Meta:
@@ -73,7 +71,7 @@ class ForecastPostSerializer(serializers.ModelSerializer):
 
 
 class ForecastGetSerializer(serializers.ModelSerializer):
-    store = serializers.CharField(source="store.store")
+    shop = serializers.CharField(source="shop.shop")
     sku = serializers.CharField(source="product.sku")
     forecast = serializers.DictField(source="forecast.sales_units")
 

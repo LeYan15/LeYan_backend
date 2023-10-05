@@ -21,7 +21,6 @@ load_dotenv()
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = os.getenv("SECRET_KEY", default="my_secret_key")
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 DEBUG = True
@@ -114,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "ru-ru"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -129,15 +128,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "back-media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# Константы моделей ----------------------------
-# ----------------------------------------------
+# Константы----------------------------
+# -------------------------------------
 
+# Модели
 MAX_LENGTH = 150
 MAX_DIGITS = 19
-DECIMAL_PLACES = 10
+DECIMAL_PLACES = 2
 
 UOM = [(1, "шт."), (17, "вес")]
 FLAG = [(0, "нет"), (1, "да")]
+
+MAX_EMAIL_LENGTH = 255
+MAX_PASSWORD_LENGTH = 150
+MAX_USERNAME_LENGTH = 150
 
 # Парсер
 HELP_TEXT_PARSER = "Загрузка данных из {} файла."
@@ -148,7 +152,3 @@ DATA_DELETE = "Данные {} удалены."
 DATA_UPLOADED = "Данные {} уже загружены."
 DATA_LOAD_IN_FILE = "Загрузка данных из {} завершена."
 OPTIONS_DELETE = "delete"
-
-MAX_EMAIL_LENGTH = 255
-MAX_PASSWORD_LENGTH = 150
-MAX_USERNAME_LENGTH = 150

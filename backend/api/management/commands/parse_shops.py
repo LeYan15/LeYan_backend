@@ -54,17 +54,13 @@ class Command(BaseCommand):
                 next(reader)
 
                 for row in reader:
-                    city = City.objects.get_or_create(city_id=row[1])[0]
-                    division = Division.objects.get_or_create(
-                        division_id=row[2]
-                    )[0]
-                    type_format = Format.objects.get_or_create(
-                        type_format_id=row[3]
-                    )[0]
-                    loc = Location.objects.get_or_create(loc_id=row[4])[0]
-                    size = Size.objects.get_or_create(size_id=row[5])[0]
+                    city = City.objects.get_or_create(name=row[1])[0]
+                    division = Division.objects.get_or_create(name=row[2])[0]
+                    type_format = Format.objects.get_or_create(name=row[3])[0]
+                    loc = Location.objects.get_or_create(name=row[4])[0]
+                    size = Size.objects.get_or_create(name=row[5])[0]
                     Shop.objects.get_or_create(
-                        store=row[0],
+                        shop=row[0],
                         city=city,
                         division=division,
                         type_format=type_format,

@@ -7,7 +7,7 @@ from shop.models import Shop
 
 class Forecast(models.Model):
 
-    store = models.ForeignKey(
+    shop = models.ForeignKey(
         Shop, on_delete=models.CASCADE, related_name="forecast"
     )
     product = models.ForeignKey(
@@ -22,7 +22,7 @@ class Forecast(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=(
-                    "store",
+                    "shop",
                     "forecast_date",
                     "product",
                 ),
@@ -32,5 +32,6 @@ class Forecast(models.Model):
 
     def __str__(self):
         return (
-            f"Прогноз для {self.store}, {self.product} с {self.forecast_date}"
+            f"Прогноз для {self.shop}: {self.product}. "
+            f"От {self.forecast_date}."
         )
