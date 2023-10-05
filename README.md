@@ -20,7 +20,7 @@ git clone https://github.com/LeYan15/LeYan_backend.git
 cd backend
 ```
 2. Создайте в директории `infra` файл `.env` с переменными окружения для работы
-с БД по примеру файла `.env.sample`
+с БД по примеру файла `.env.example`
 
 3. Создайте и активируйте виртуальное окружение, обновите pip:
 ```
@@ -84,8 +84,19 @@ python manage.py migrate
 python manage.py collectstatic --no-input
 ```
 13. Наполните базу данными
+Команды для выгрузки данных из csv-файлов:
+```sh
+python backend/manage.py parse_product
 ```
-python manage.py loaddata ingredients.json
+```sh
+python backend/manage.py parse_shops
+```
+```sh
+python backend/manage.py parse_sales
+```
+PS Для удаления данных из базы, используейте дополнительную опцию ```--delete``` и для помощи ```--h```:
+```sh
+python backend/manage.py <команда> --delete
 ```
 14. Создайте суперюзера
 ```

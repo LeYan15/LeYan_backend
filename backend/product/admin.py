@@ -6,24 +6,24 @@ from product.models import Category, Group, Product, SubCategory
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
 
-    list_display = ("cat_id",)
-    search_fields = ("cat_id",)
+    list_display = ("name",)
+    search_fields = ("name",)
     empty_value_display = "--пусто--"
 
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
 
-    list_display = ("group_id",)
-    search_fields = ("group_id",)
+    list_display = ("name",)
+    search_fields = ("name",)
     empty_value_display = "--пусто--"
 
 
 @admin.register(SubCategory)
 class SubcategoryAdmin(admin.ModelAdmin):
 
-    list_display = ("subcat_id",)
-    search_fields = ("subcat_id",)
+    list_display = ("name",)
+    search_fields = ("name",)
     empty_value_display = "--пусто--"
 
 
