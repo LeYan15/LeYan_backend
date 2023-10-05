@@ -40,7 +40,7 @@ class SubCategory(models.Model):
         verbose_name_plural = "Подкатегории"
 
     def __str__(self):
-        return str(self.subcat_id)
+        return self.subcat_id
 
 
 class Product(models.Model):
@@ -49,15 +49,15 @@ class Product(models.Model):
         "Артикул", max_length=settings.MAX_LENGTH, primary_key=True
     )
     group = models.ForeignKey(
-        Group, on_delete=models.SET_NULL, related_name="products", null=True
+        Group, on_delete=models.SET_NULL, related_name="product", null=True
     )
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, related_name="products", null=True
+        Category, on_delete=models.SET_NULL, related_name="product", null=True
     )
     subcategory = models.ForeignKey(
         SubCategory,
         on_delete=models.SET_NULL,
-        related_name="products",
+        related_name="product",
         null=True,
     )
     uom = models.IntegerField("Ед. изм.", choices=settings.UOM)
@@ -67,4 +67,4 @@ class Product(models.Model):
         verbose_name_plural = "Продукты"
 
     def __str__(self):
-        return str(self.sku)
+        return self.sku

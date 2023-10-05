@@ -32,7 +32,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        models = [Sale, Product, Shop]
+        models = [
+            Sale,
+        ]
 
         if options[settings.OPTIONS_DELETE]:
             for model in models:
@@ -56,8 +58,8 @@ class Command(BaseCommand):
                 next(reader)
 
                 for row in reader:
-                    shop = Shop.objects.get(store=row[0])[0]
-                    sku = Product.objects.get(sku=row[1])[0]
+                    shop = Shop.objects.get(shop=row[0])
+                    sku = Product.objects.get(sku=row[1])
                     Sale.objects.get_or_create(
                         shop=shop,
                         product=sku,
