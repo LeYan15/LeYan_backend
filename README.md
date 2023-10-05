@@ -1,4 +1,6 @@
-# Хакатон.Лента
+![leyan_workflow](https://github.com/LeYan15/LeYan_backend/actions/workflows/leyan_workflow.yml/badge.svg)
+
+# ...
 
 ## Описание проекта
 Интерфейс прогноза спроса на 14 дней для товаров собственного производства с использованием гранулярности ТК-SKU-День.
@@ -20,11 +22,7 @@ cd backend
 2. Создайте в директории `infra` файл `.env` с переменными окружения для работы
 с БД по примеру файла `.env.sample`
 
-3. Запустите сборку образа в директории backend:
-```
-docker build -t <DOCKER_USERNAME>/leyan:<tag> .
-```
-4. Создайте и активируйте виртуальное окружение, обновите pip:
+3. Создайте и активируйте виртуальное окружение, обновите pip:
 ```
 python -m venv venv
 ```
@@ -39,11 +37,11 @@ python -m venv venv
     source venv/scripts/activate
     ```
 
-5. Устанавите зависимости:
+4. Установите зависимости:
 ```
 pip install -r requirements.txt
 ```
-6. Подготовьте репозиторий на GitHub
+5. Подготовьте репозиторий на GitHub
 
 В репозитории на GitHub пропишите в разделе Secrets > Actions:
 ```
@@ -55,6 +53,11 @@ SSH_KEY - приватный ssh-ключ (начало -----BEGIN OPENSSH PRIVA
 PASSPHRASE - кодовая фраза для ssh-ключа (если ваш ssh-ключ защищён фразой-паролем)
 TELEGRAM_TO - ID своего телеграм-аккаунта. Узнать можно у бота `@userinfobot`
 TELEGRAM_TOKEN - токен вашего бота. Получить можно у бота `@BotFather`
+```
+
+6. Запустите сборку образа в директории backend:
+```
+docker build -t leyan .
 ```
 7. Запустите сборку контейнеров:
 ```
