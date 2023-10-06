@@ -12,19 +12,24 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray) ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) 	![Jinja](https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)  ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) ![DjDT](https://img.shields.io/badge/DjDT-4.2.0-gold)
 
 
-## Инструкция по сборке и запуску
-1. Склонируйте репозиторий и перейдите в него:
-```
+## Инструкция по запуску локально и в контейнере
+
+### Склонируйте репозиторий и перейдите в него:
+```sh
 git clone https://github.com/LeYan15/LeYan_backend.git
 ```
-```
+```sh
 cd backend
 ```
-2. Создайте в директории `infra` файл `.env` с переменными окружения для работы
-с БД по примеру файла `.env.example`
-
-3. Создайте и активируйте виртуальное окружение, обновите pip:
+### Заполните .env данными для PostgreSQL:
+Создайте в директории `infra` файл `.env` командой:
+```sh
+touch infra/.env
 ```
+Заполните переменные по примеру файла `.env.example`
+
+### Создайте и активируйте виртуальное окружение:
+```sh
 python -m venv venv
 ```
 
@@ -38,54 +43,59 @@ python -m venv venv
     source venv/scripts/activate
     ```
 
-4. Установите зависимости:
-```
-pip install -r requirements.txt
-```
-5. Подготовьте репозиторий на GitHub
-
-В репозитории на GitHub пропишите в разделе Secrets > Actions:
-```
-DOCKER_USERNAME - имя пользователя DockerHub
-DOCKER_PASSWORD - пароль пользователя DockerHub
-HOST - IP сервера
-USER - текущий пользователь
-SSH_KEY - приватный ssh-ключ (начало -----BEGIN OPENSSH PRIVATE KEY----- ... -----END OPENSSH PRIVATE KEY----- конец)
-PASSPHRASE - кодовая фраза для ssh-ключа (если ваш ssh-ключ защищён фразой-паролем)
-TELEGRAM_TO - ID своего телеграм-аккаунта. Узнать можно у бота `@userinfobot`
-TELEGRAM_TOKEN - токен вашего бота. Получить можно у бота `@BotFather`
+### Обновите pip и установите зависимости:
+```sh
+python -m pip install --upgrade pip
 ```
 
-6. Запустите сборку образа в директории backend:
+```sh
+pip install -r backend/requirements.txt
 ```
-docker build -t leyan .
+
+## Для локального запуска используйте следующую инструкцию
+
+### Выполните миграции:
+
+* Инициализируйте миграции
+```sh
+python backend/manage.py migrate
 ```
-7. Запустите сборку контейнеров:
+
+* Создайте миграции
+```sh
+python backend/manage.py makemigrations shop
 ```
-docker-compose up -d --build
+```sh
+python backend/manage.py makemigrations product
 ```
-8. Перейдите в контейнер
+```sh
+python backend/manage.py makemigrations sale
 ```
-docker container exec -it <CONTAINER ID> bash #возьмите ID контейнера проекта
+```sh
+python backend/manage.py makemigrations forecast
 ```
-9. Посмотрите список миграций
+
+* Примените миграции
+```sh
+python backend/manage.py migrate
 ```
-python manage.py showmigrations
+
+### Создайте суперюзера
+
+```sh
+python backend/manage.py createsuperuser
 ```
-10. Выполните миграции
+Данные супер юзера для примера:
 ```
-python manage.py makemigrations
+username: admin
+mail: admin@admin.ru
+password: admin
+password (again): admin
 ```
-11. Примените миграции
-```
-python manage.py migrate
-```
-12. Соберите статистику
-```
-python manage.py collectstatic --no-input
-```
-13. Наполните базу данными
-#### Команды для выгрузки данных из csv-файлов:
+
+### Наполните базу данными
+
+* Команды для выгрузки данных из csv-файлов:
 ```sh
 python backend/manage.py parse_product
 ```
@@ -95,14 +105,49 @@ python backend/manage.py parse_shops
 ```sh
 python backend/manage.py parse_sales
 ```
-#### PS Для удаления данных из базы, используейте дополнительную опцию ```--delete``` и для помощи ```--h```:
+
+PS Для удаления данных из базы, используейте дополнительную опцию ```--delete``` и для помощи ```--h```:
 ```sh
 python backend/manage.py <команда> --delete
 ```
-14. Создайте суперюзера
+
+
+## Для запуска в контейнере используйте следующую инструкцию
+
+### Подготовьте репозиторий на GitHub
+
+В репозитории на GitHub пропишите в разделе Secrets > Actions:
+```sh
+DOCKER_USERNAME - имя пользователя DockerHub
+DOCKER_PASSWORD - пароль пользователя DockerHub
+HOST - IP сервера
+USER - текущий пользователь
+SSH_KEY - приватный ssh-ключ (начало -----BEGIN OPENSSH PRIVATE KEY----- ... -----END OPENSSH PRIVATE KEY----- конец)
+PASSPHRASE - кодовая фраза для ssh-ключа (если ваш ssh-ключ защищён фразой-паролем)
 ```
-python manage.py createsuperuser
+
+### Запустите сборку образа в директории backend:
 ```
+docker build -t leyan .
+```
+### Запустите сборку контейнеров:
+```
+docker-compose up -d --build
+```
+### Перейдите в контейнер
+```
+docker container exec -it <CONTAINER ID> bash #возьмите ID контейнера проекта
+```
+### Посмотрите список миграций
+```
+python manage.py showmigrations
+```
+
+### Соберите статистику
+```
+python manage.py collectstatic --no-input
+```
+
 
 ## Адрес админки проекта
 *(запускается локально)*
