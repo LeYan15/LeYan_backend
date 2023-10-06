@@ -5,7 +5,9 @@ from rest_framework import (
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from api.filters import ProductFilter, ShopFilter, UserFilter
+from api.filters import ProductFilter, ShopFilter
+
+# , UserFilter
 from api.paginations import LimitPageNumberPagination
 from api.serializers import (
     ForecastGetSerializer,
@@ -13,21 +15,22 @@ from api.serializers import (
     ProductSerializer,
     SaleSerializer,
     ShopSerializer,
-    UserSerializer,
+    # UserSerializer,
 )
 from forecast.models import Forecast
 from product.models import Product
 from sale.models import Sale
 from shop.models import Shop
-from users.models import User
+
+# from users.models import User
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (permissions.AllowAny,)
-    filterset_class = UserFilter
-    pagination_class = LimitPageNumberPagination
+# class UserViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = (permissions.AllowAny,)
+#     filterset_class = UserFilter
+#     pagination_class = LimitPageNumberPagination
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):

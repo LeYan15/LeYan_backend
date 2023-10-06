@@ -4,7 +4,8 @@ from forecast.models import Forecast
 from product.models import Product
 from sale.models import Sale
 from shop.models import Shop
-from users.models import User
+
+# from users.models import User
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -80,11 +81,11 @@ class ForecastGetSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["email", "username", "first_name", "last_name", "password"]
-        extra_kwargs = {"password": {"write_only": True}}
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ["email", "username", "first_name", "last_name", "password"]
+#         extra_kwargs = {"password": {"write_only": True}}
 
-    def create(self, validated_data: dict) -> User:
-        return User.objects.create_user(**validated_data)
+#     def create(self, validated_data: dict) -> User:
+#         return User.objects.create_user(**validated_data)

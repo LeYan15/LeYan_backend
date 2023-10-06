@@ -1,6 +1,6 @@
-# backend/users/admin.py
-from django.contrib import admin
+# # backend/users/admin.py
+# from django.contrib import admin
 
-from .models import User
+# from .models import User
 
-admin.site.register(User)
+# admin.site.register(User)

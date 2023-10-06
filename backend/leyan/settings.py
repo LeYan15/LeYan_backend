@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
     "shop.apps.ShopConfig",
-    "users.apps.UsersConfig",
+    # "users.apps.UsersConfig",
+    "rest_framework",
+    "djoser",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -95,7 +98,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "users.User"
+# AUTH_USER_MODEL = "users.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -151,4 +154,12 @@ DATA_DIR = "data/{}"
 DATA_DELETE = "Данные {} удалены."
 DATA_UPLOADED = "Данные {} уже загружены."
 DATA_LOAD_IN_FILE = "Загрузка данных из {} завершена."
+
 OPTIONS_DELETE = "delete"
+
+# Logger
+LOG_FORMAT = "%(asctime)s :: %(name)s:%(lineno)s - %(levelname)s - %(message)s"
+LOG_FILE = "backend/api/logs/file.log"
+LOG_INIT = "backend/api/logs/__init__.py"
+LOG_MESSAGE = "Custom log"
+LOG_PASS_FILTER = "password"
