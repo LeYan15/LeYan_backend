@@ -35,7 +35,7 @@ python -m venv venv
 
 * Если у вас windows
     ```
-    source venv/scripts/activate
+    . venv/scripts/activate
     ```
 
 4. Установите зависимости:
