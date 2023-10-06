@@ -1,6 +1,6 @@
 ![leyan_workflow](https://github.com/LeYan15/LeYan_backend/actions/workflows/leyan_workflow.yml/badge.svg)
 
-# ...
+# LeYan - проект в рамках Хакатона Ленты и Практикума
 
 ## Описание проекта
 Интерфейс прогноза спроса на 14 дней для товаров собственного производства с использованием гранулярности ТК-SKU-День.
@@ -12,23 +12,23 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray) ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) 	![Jinja](https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)  ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) ![DjDT](https://img.shields.io/badge/DjDT-4.2.0-gold)
 
 
-## Инструкция по запуску локально и в контейнере
+# Инструкции
 
-### Склонируйте репозиторий и перейдите в него:
+## Проект и виртуальное окружение
+#### Склонируйте репозиторий и перейдите в него:
 ```sh
 git clone https://github.com/LeYan15/LeYan_backend.git
 ```
-```sh
-cd backend
-```
-### Заполните .env данными для PostgreSQL:
-Создайте в директории `infra` файл `.env` командой:
+
+#### Для работы с PostgreSQL:
+* Создайте в директории `infra` файл `.env` командой:
 ```sh
 touch infra/.env
 ```
-Заполните переменные по примеру файла `.env.example`
+* Заполните переменные по примеру файла `.env.example`
 
-### Создайте и активируйте виртуальное окружение:
+#### Создайте и активируйте виртуальное окружение:
+
 ```sh
 python -m venv venv
 ```
@@ -43,18 +43,16 @@ python -m venv venv
     . venv/scripts/activate
     ```
 
-### Обновите pip и установите зависимости:
+#### Обновите pip и установите зависимости:
 ```sh
 python -m pip install --upgrade pip
-```
 
-```sh
 pip install -r backend/requirements.txt
 ```
 
 ## Для локального запуска используйте следующую инструкцию
 
-### Выполните миграции:
+#### Выполните миграции:
 
 * Инициализируйте миграции
 ```sh
@@ -64,14 +62,11 @@ python backend/manage.py migrate
 * Создайте миграции
 ```sh
 python backend/manage.py makemigrations shop
-```
-```sh
+
 python backend/manage.py makemigrations product
-```
-```sh
+
 python backend/manage.py makemigrations sale
-```
-```sh
+
 python backend/manage.py makemigrations forecast
 ```
 
@@ -80,7 +75,7 @@ python backend/manage.py makemigrations forecast
 python backend/manage.py migrate
 ```
 
-### Создайте суперюзера
+#### Создайте суперюзера
 
 ```sh
 python backend/manage.py createsuperuser
@@ -93,7 +88,7 @@ password: admin
 password (again): admin
 ```
 
-### Наполните базу данными
+#### Наполните базу данными
 
 * Команды для выгрузки данных из csv-файлов:
 ```sh
@@ -105,19 +100,24 @@ python backend/manage.py parse_shops
 ```sh
 python backend/manage.py parse_sales
 ```
-
-PS Для удаления данных из базы, используейте дополнительную опцию ```--delete``` и для помощи ```--h```:
+* Используйте дополнительные опции:
+- Для удаления данных из базы`--delete`:
 ```sh
 python backend/manage.py <команда> --delete
 ```
+- Для помощи `--h`:
 
+#### Локальный запуск
+```sh
+python backend/manage.py runserver
+```
 
 ## Для запуска в контейнере используйте следующую инструкцию
 
-### Подготовьте репозиторий на GitHub
+#### Подготовьте репозиторий на GitHub
 
 В репозитории на GitHub пропишите в разделе Secrets > Actions:
-```sh
+```
 DOCKER_USERNAME - имя пользователя DockerHub
 DOCKER_PASSWORD - пароль пользователя DockerHub
 HOST - IP сервера
@@ -126,25 +126,23 @@ SSH_KEY - приватный ssh-ключ (начало -----BEGIN OPENSSH PRIVA
 PASSPHRASE - кодовая фраза для ssh-ключа (если ваш ssh-ключ защищён фразой-паролем)
 ```
 
-### Запустите сборку образа в директории backend:
-```
-docker build -t leyan .
-```
-### Запустите сборку контейнеров:
-```
+
+#### Запустите сборку контейнеров в директории ```infra/```:
+```sh
 docker-compose up -d --build
 ```
-### Перейдите в контейнер
-```
+#### Перейдите в контейнер
+```sh
 docker container exec -it <CONTAINER ID> bash #возьмите ID контейнера проекта
 ```
-### Посмотрите список миграций
-```
+
+#### Посмотрите список миграций
+```sh
 python manage.py showmigrations
 ```
 
-### Соберите статистику
-```
+#### Соберите статистику
+```sh
 python manage.py collectstatic --no-input
 ```
 
