@@ -3,7 +3,8 @@ from django_filters import OrderingFilter
 
 from product.models import Product
 from shop.models import Shop
-from users.models import User
+
+# from users.models import User
 
 
 class ProductFilter(django_filters.FilterSet):
@@ -24,13 +25,13 @@ class ShopFilter(django_filters.FilterSet):
         fields = ["name", "location"]
 
 
-class UserFilter(django_filters.FilterSet):
-    username = django_filters.CharFilter(lookup_expr="icontains")
-    email = django_filters.CharFilter(lookup_expr="icontains")
+# class UserFilter(django_filters.FilterSet):
+#     username = django_filters.CharFilter(lookup_expr="icontains")
+#     email = django_filters.CharFilter(lookup_expr="icontains")
 
-    class Meta:
-        model = User
-        fields = ["username", "email"]
+#     class Meta:
+#         model = User
+#         fields = ["username", "email"]
 
 
 class ProductOrderingFilter(django_filters.FilterSet):
@@ -59,14 +60,14 @@ class ShopOrderingFilter(django_filters.FilterSet):
         fields = []
 
 
-class UserOrderingFilter(django_filters.FilterSet):
-    ordering = OrderingFilter(
-        fields=(
-            ("username", "username"),
-            ("email", "email"),
-        )
-    )
+# class UserOrderingFilter(django_filters.FilterSet):
+#     ordering = OrderingFilter(
+#         fields=(
+#             ("username", "username"),
+#             ("email", "email"),
+#         )
+#     )
 
-    class Meta:
-        model = User
-        fields = []
+#     class Meta:
+#         model = User
+#         fields = []

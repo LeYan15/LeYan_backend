@@ -6,14 +6,14 @@ from api.views import (
     ProductViewSet,
     SalesViewSet,
     ShopsViewSet,
-    UserViewSet,
+    # UserViewSet,
 )
 
 app_name = "api"
 
 router = DefaultRouter()
 
-router.register("users", UserViewSet, basename="users")
+# router.register("users", UserViewSet, basename="users")
 router.register("product", ProductViewSet, basename="product")
 router.register("sale", SalesViewSet, basename="sale")
 router.register("shop", ShopsViewSet, basename="shop")

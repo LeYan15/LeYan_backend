@@ -84,7 +84,7 @@ python manage.py migrate
 python manage.py collectstatic --no-input
 ```
 13. Наполните базу данными
-Команды для выгрузки данных из csv-файлов:
+#### Команды для выгрузки данных из csv-файлов:
 ```sh
 python backend/manage.py parse_product
 ```
@@ -94,7 +94,7 @@ python backend/manage.py parse_shops
 ```sh
 python backend/manage.py parse_sales
 ```
-PS Для удаления данных из базы, используейте дополнительную опцию ```--delete``` и для помощи ```--h```:
+#### PS Для удаления данных из базы, используейте дополнительную опцию ```--delete``` и для помощи ```--h```:
 ```sh
 python backend/manage.py <команда> --delete
 ```
