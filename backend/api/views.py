@@ -56,6 +56,7 @@ class SalesViewSet(viewsets.ModelViewSet):
 class ForecastViewSet(viewsets.ModelViewSet):
     queryset = Forecast.objects.all()
     http_method_names = ["get", "post"]
+    serializer_class = ForecastGetSerializer
 
     @action(detail=False, methods=["get"])
     def get_forecast(self, request):
