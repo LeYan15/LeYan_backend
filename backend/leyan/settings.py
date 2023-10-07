@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "debug_toolbar",
+    "drf_yasg",
     "api.apps.ApiConfig",
     "product.apps.ProductConfig",
     "forecast.apps.ForecastConfig",
