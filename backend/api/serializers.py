@@ -23,32 +23,6 @@ class SaleSerializer(serializers.ModelSerializer):
         model = Sale
         fields = "__all__"
 
-    def get_fact(self, obj):
-        pass
-
-
-class FactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Sale
-        fields = [
-            "date",
-            "sales_type",
-            "sales_units",
-            "sales_units_promo",
-            "sales_rub",
-            "sales_rub_promo",
-        ]
-
-
-class SaleFactSerializer(serializers.ModelSerializer):
-    shop = serializers.CharField()
-    sku = serializers.CharField()
-    fact = FactSerializer(many=True)
-
-    class Meta:
-        model = Sale
-        fields = "__all__"
-
 
 class ShopSerializer(serializers.ModelSerializer):
     city = serializers.ReadOnlyField(source="city.name")
@@ -62,19 +36,19 @@ class ShopSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ForecastPostSerializer(serializers.ModelSerializer):
+class ForecastSerializer(serializers.ModelSerializer):
     shop = serializers.CharField(source="shop.shop")
-    forecast = serializers.DictField()
+    sku = serializers.CharField(source="product.sku")
+    forecast = serializers.DictField(source="forecast.sales_units")
 
     class Meta:
         model = Forecast
         fields = "__all__"
 
 
-class ForecastGetSerializer(serializers.ModelSerializer):
+class ForecastCreateSerializer(serializers.ModelSerializer):
     shop = serializers.CharField(source="shop.shop")
-    sku = serializers.CharField(source="product.sku")
-    forecast = serializers.DictField(source="forecast.sales_units")
+    forecast = serializers.DictField()
 
     class Meta:
         model = Forecast

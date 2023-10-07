@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "debug_toolbar",
     "drf_yasg",
     "api.apps.ApiConfig",
@@ -155,6 +156,7 @@ OPTIONS_DELETE = "delete"
 # Logger
 LOG_FORMAT = "%(asctime)s :: %(name)s:%(lineno)s - %(levelname)s - %(message)s"
 LOG_FILE = "backend/api/logs/file.log"
+LOG_DIR = "backend/api/logs/"
 LOG_INIT = "backend/api/logs/__init__.py"
 LOG_MESSAGE = "Custom log"
 LOG_PASS_FILTER = "password"
