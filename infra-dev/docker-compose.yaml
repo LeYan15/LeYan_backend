@@ -32,6 +32,14 @@ services:
   #   depends_on:
   #     - backend
 
+  # ml:
+  #   build:
+  #     context: ../ml
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - backend
+  #     - frontend
+
   nginx:
     image: nginx:1.23.4-alpine
     restart: always
