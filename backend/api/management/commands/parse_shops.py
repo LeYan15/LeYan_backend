@@ -60,7 +60,7 @@ class Command(BaseCommand):
                     loc = Location.objects.get_or_create(name=row[4])[0]
                     size = Size.objects.get_or_create(name=row[5])[0]
                     Shop.objects.get_or_create(
-                        shop=row[0],
+                        name=row[0],
                         city=city,
                         division=division,
                         type_format=type_format,

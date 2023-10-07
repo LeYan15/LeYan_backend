@@ -15,7 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SaleSerializer(serializers.ModelSerializer):
-    shop = serializers.ReadOnlyField(source="shop.shop")
+    shop = serializers.ReadOnlyField(source="shop.name")
     sku = serializers.ReadOnlyField(source="product.sku")
     fact = serializers.SerializerMethodField()
 
@@ -25,6 +25,7 @@ class SaleSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
+    name = serializers.ReadOnlyField(source="shop.name")
     city = serializers.ReadOnlyField(source="city.name")
     division = serializers.ReadOnlyField(source="division.name")
     type_format = serializers.ReadOnlyField(source="type_format.name")
@@ -37,7 +38,7 @@ class ShopSerializer(serializers.ModelSerializer):
 
 
 class ForecastSerializer(serializers.ModelSerializer):
-    shop = serializers.CharField(source="shop.shop")
+    shop = serializers.CharField(source="shop.name")
     sku = serializers.CharField(source="product.sku")
     forecast = serializers.DictField(source="forecast.sales_units")
 
@@ -47,7 +48,7 @@ class ForecastSerializer(serializers.ModelSerializer):
 
 
 class ForecastCreateSerializer(serializers.ModelSerializer):
-    shop = serializers.CharField(source="shop.shop")
+    shop = serializers.CharField(source="shop.name")
     forecast = serializers.DictField()
 
     class Meta:

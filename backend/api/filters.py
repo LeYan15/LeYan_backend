@@ -19,7 +19,7 @@ class ProductFilter(FilterSet):
 
 
 class ShopFilter(SearchFilter):
-    # shop = filters.CharFilter(lookup_expr="icontains")
+    # name = filters.CharFilter(lookup_expr="icontains")
     # city = filters.ModelChoiceFilter(lookup_expr="icontains")
 
     def filter_queryset(self, request, queryset, view):

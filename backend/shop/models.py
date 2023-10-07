@@ -25,7 +25,7 @@ class Division(NameCharModel):
         verbose_name_plural = "Подразделения"
 
     def __str__(self):
-        return str(self.name)
+        return self.name
 
 
 class NameIntModel(models.Model):
@@ -34,9 +34,6 @@ class NameIntModel(models.Model):
 
     class Meta:
         abstract = True
-
-    def __str__(self):
-        return self.name
 
 
 class Format(NameIntModel):
@@ -66,23 +63,22 @@ class Size(NameIntModel):
         verbose_name_plural = "Размеры"
 
 
-class Shop(models.Model):
+class Shop(NameCharModel):
 
-    shop = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
     city = models.ForeignKey(
-        City, on_delete=models.SET_NULL, related_name="shop", null=True
+        City, on_delete=models.SET_NULL, related_name="shops", null=True
     )
     division = models.ForeignKey(
-        Division, on_delete=models.SET_NULL, related_name="shop", null=True
+        Division, on_delete=models.SET_NULL, related_name="shops", null=True
     )
     type_format = models.ForeignKey(
-        Format, on_delete=models.SET_NULL, related_name="shop", null=True
+        Format, on_delete=models.SET_NULL, related_name="shops", null=True
     )
     loc = models.ForeignKey(
-        Location, on_delete=models.SET_NULL, related_name="shop", null=True
+        Location, on_delete=models.SET_NULL, related_name="shops", null=True
     )
     size = models.ForeignKey(
-        Size, on_delete=models.SET_NULL, related_name="shop", null=True
+        Size, on_delete=models.SET_NULL, related_name="shops", null=True
     )
     is_active = models.IntegerField(choices=settings.FLAG)
 
@@ -91,4 +87,4 @@ class Shop(models.Model):
         verbose_name_plural = "Магазины"
 
     def __str__(self):
-        return self.shop
+        return self.name
