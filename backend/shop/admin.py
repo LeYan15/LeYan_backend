@@ -46,9 +46,9 @@ class SizeAdmin(admin.ModelAdmin):
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
 
-    list_display = ("shop", "city", "type_format", "loc", "size", "is_active")
+    list_display = ("name", "city", "type_format", "loc", "size", "is_active")
     search_fields = (
-        "shop",
+        "name",
         "city",
         "type_format",
         "loc",
