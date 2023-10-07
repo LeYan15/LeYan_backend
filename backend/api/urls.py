@@ -14,9 +14,9 @@ app_name = "api"
 router = DefaultRouter()
 
 # router.register("users", UserViewSet, basename="users")
-router.register("product", ProductViewSet, basename="product")
-router.register("sale", SalesViewSet, basename="sale")
-router.register("shop", ShopsViewSet, basename="shop")
+router.register("products", ProductViewSet, basename="products")
+router.register("sales", SalesViewSet, basename="sales")
+router.register("shops", ShopsViewSet, basename="shops")
 router.register("forecast", ForecastViewSet, basename="forecast")
 
 
