@@ -1,73 +1,47 @@
-import django_filters
-from django_filters import OrderingFilter
+from itertools import chain
+from urllib.parse import unquote
 
-from product.models import Product
-from shop.models import Shop
+from django_filters.rest_framework import FilterSet, filters
+from rest_framework.filters import SearchFilter
 
-# from users.models import User
-
-
-class ProductFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr="icontains")
-    price = django_filters.NumberFilter()
-
-    class Meta:
-        model = Product
-        fields = ["name", "price"]
+from product.models import Product, Group, Category, SubCategory
 
 
-class ShopFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr="icontains")
-    location = django_filters.CharFilter(lookup_expr="icontains")
-
-    class Meta:
-        model = Shop
-        fields = ["name", "location"]
-
-
-# class UserFilter(django_filters.FilterSet):
-#     username = django_filters.CharFilter(lookup_expr="icontains")
-#     email = django_filters.CharFilter(lookup_expr="icontains")
-
-#     class Meta:
-#         model = User
-#         fields = ["username", "email"]
-
-
-class ProductOrderingFilter(django_filters.FilterSet):
-    ordering = OrderingFilter(
-        fields=(
-            ("name", "name"),
-            ("price", "price"),
-        )
-    )
+class ProductFilter(FilterSet):
+    sku = filters.CharFilter(lookup_expr="icontains")
+    group = filters.ModelChoiceFilter(queryset=Group.objects.all())
+    category = filters.ModelChoiceFilter(queryset=Category.objects.all())
+    subcategory = filters.ModelChoiceFilter(queryset=SubCategory.objects.all())
 
     class Meta:
         model = Product
-        fields = []
+        fields = ["sku"]
 
 
-class ShopOrderingFilter(django_filters.FilterSet):
-    ordering = OrderingFilter(
-        fields=(
-            ("name", "name"),
-            ("location", "location"),
-        )
-    )
+class ShopFilter(SearchFilter):
+    # shop = filters.CharFilter(lookup_expr="icontains")
+    # city = filters.ModelChoiceFilter(lookup_expr="icontains")
 
-    class Meta:
-        model = Shop
-        fields = []
+    def filter_queryset(self, request, queryset, view):
 
-
-# class UserOrderingFilter(django_filters.FilterSet):
-#     ordering = OrderingFilter(
-#         fields=(
-#             ("username", "username"),
-#             ("email", "email"),
-#         )
-#     )
-
-#     class Meta:
-#         model = User
-#         fields = []
+        name_query_params = "name"
+        value = request.query_params.get(name_query_params, None)
+        if value:
+            if value[0] == "%":
+                value = unquote(value)
+            else:
+                value = value.translate(
+                    str.maketrans(
+                        "qwertyuiop[]asdfghjkl;'zxcvbnm,./",
+                        "йцукенгшщзхъфывапролджэячсмитьбю.",
+                    )
+                )
+            value = value.lower()
+            queryset_istartswith = queryset.filter(name__istartswith=value)
+            queryset_contains = (
+                queryset.filter(name__contains=value)
+                .difference(queryset_istartswith)
+                .order_by(name_query_params)
+            )
+            return list(chain(queryset_istartswith, queryset_contains))
+        return queryset
