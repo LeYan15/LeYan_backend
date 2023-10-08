@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
     "shop.apps.ShopConfig",
-    # "users.apps.UsersConfig",
+    "user.apps.UserConfig",
 ]
 
 MIDDLEWARE = [
@@ -94,7 +94,7 @@ DATABASES = {
     }
 }
 
-# AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "user.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,12 +117,11 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = "back-static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "back-static")
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-MEDIA_URL = "back-media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "back-media")
+MEDIA_URL = "media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -138,9 +137,16 @@ DECIMAL_PLACES = 2
 UOM = [(1, "шт."), (17, "вес")]
 FLAG = [(0, "нет"), (1, "да")]
 
-MAX_EMAIL_LENGTH = 255
-MAX_PASSWORD_LENGTH = 150
-MAX_USERNAME_LENGTH = 150
+# Юзер-админ
+MAIL_LENGTH = 255
+MAIL_VALID = r"[^@]+@[^@]+\.[^@]+"
+MAIL_ERROR = "{} недопустимый формат эл. почты."
+
+USER_VALID = "Нельзя использовать имя: {}!"
+CHAR_VALID = r"^[а-яА-ЯёЁa-zA-Z0-9]+$"
+CHAR_VALID_USER = r"^[a-zA-Z0-9]+$"
+
+LENGTH_HELP = f"Максимум {MAX_LENGTH} символов."
 
 # Парсер
 HELP_TEXT_PARSER = "Загрузка данных из {} файла."
@@ -153,7 +159,7 @@ DATA_LOAD_IN_FILE = "Загрузка данных из {} завершена."
 
 OPTIONS_DELETE = "delete"
 
-# Logger
+# Логгер
 LOG_FORMAT = "%(asctime)s :: %(name)s:%(lineno)s - %(levelname)s - %(message)s"
 LOG_FILE = "backend/api/logs/file.log"
 LOG_DIR = "backend/api/logs/"

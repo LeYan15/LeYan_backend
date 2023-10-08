@@ -8,10 +8,10 @@ from shop.models import Shop
 class Sale(models.Model):
 
     shop = models.ForeignKey(
-        Shop, on_delete=models.CASCADE, related_name="sale"
+        Shop, on_delete=models.CASCADE, related_name="sales"
     )
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="sale"
+        Product, on_delete=models.CASCADE, related_name="sales"
     )
     date = models.DateField()
     sales_type = models.IntegerField(choices=settings.FLAG)
