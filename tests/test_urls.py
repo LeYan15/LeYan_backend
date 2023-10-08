@@ -25,5 +25,5 @@ class TestAuthUrls:
             f'Страница `{url}` не найдена, проверьте этот адрес в *urls.py*'
         )
         assert response.status_code == 200, (
-            f'Ошибка {response.status_code} при открытиии `{url}`.'
+            f'Ошибка {response.status_code} при открытии `{url}`.'
         )
