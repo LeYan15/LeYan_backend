@@ -189,7 +189,7 @@ get, /forecast # Возвращает спрогнозированные зна�
 **Дизайнеры**:
 - Малеева Евгения ([@eugenia_maleeva](https://t.me/eugenia_maleeva), **[Eugenia-mei](https://github.com/Eugenia-mei)**)
 - Токарский Илья ([@tokarsky_ilya](https://t.me/tokarsky_ilya), **[marolfox](https://github.com/marolfox)**)
-- Черкасова Лола ([@lola_cherkasovaa](https://t.me/lola_cherkasovaa)
+- Черкасова Лола ([@lola_cherkasovaa](https://t.me/lola_cherkasovaa))
 
 **DS**:
 - Киселев Владимир ([@vks1v](https://t.me/vks1v), **[vkslv](https://github.com/vkslv)**)
