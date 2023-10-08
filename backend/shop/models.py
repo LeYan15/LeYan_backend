@@ -66,9 +66,8 @@ class Size(NameIntModel):
         verbose_name_plural = "Размеры"
 
 
-class Shop(models.Model):
+class Shop(NameCharModel):
 
-    shop = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
     city = models.ForeignKey(
         City, on_delete=models.SET_NULL, related_name="shop", null=True
     )
@@ -91,4 +90,4 @@ class Shop(models.Model):
         verbose_name_plural = "Магазины"
 
     def __str__(self):
-        return self.shop
+        return self.name

@@ -26,7 +26,7 @@
 2. *Для работы с PostgreSQL*:
 
     * Создайте в директории `infra/` файл `.env` командой:
-    
+
         ```sh
         touch infra/.env
         ```
@@ -65,7 +65,7 @@
         ```sh
         python backend/manage.py migrate
         ```
-    
+
     * Создайте миграции
         ```sh
         python backend/manage.py makemigrations shop
@@ -82,7 +82,7 @@
          ```sh
         python backend/manage.py makemigrations forecast
         ```
-    
+
     * Примените миграции
         ```sh
         python backend/manage.py migrate
@@ -134,7 +134,7 @@
 1. *Подготовьте репозиторий на GitHub*:
 
     В репозитории на GitHub пропишите в разделе Secrets > Actions:
-    
+
         DOCKER_USERNAME - <имя пользователя DockerHub>
         DOCKER_PASSWORD - <пароль пользователя DockerHub>
         HOST - <IP сервера>
@@ -142,24 +142,24 @@
         SSH_KEY - <приватный ssh-ключ (начало -----BEGIN OPENSSH PRIVATE KEY----- ... -----END OPENSSH PRIVATE KEY----- конец)>
         PASSPHRASE - <кодовая фраза для ssh-ключа (если ваш ssh-ключ защищён фразой-паролем)>
 ---
-2. *Запустите сборку контейнеров в директории* `infra/`:
+2. *Запустите сборку контейнеров*:
 
     ```sh
-    docker-compose up -d --build
+    docker compose infra/docker-compose.yaml up -d --build
     ```
 ---
-
-## Адрес админки проекта
-
-*(запускается локально)*
-
-    http://127.0.0.1:8000/admin/
 
 ## Адрес проекта
 
 *(запускается локально)*
 
     http://127.0.0.1:8000/
+
+## Адрес админки проекта
+
+*(запускается локально)*
+
+    http://127.0.0.1:8000/admin/
 
 ## Документация
 

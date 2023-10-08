@@ -6,12 +6,14 @@ from django.conf import settings
 from django.core.management import BaseCommand
 
 from api.management.logger import init_logger
-from shop.models import City, Division, Format, Location, Shop, Size
+from product.models import Product
+from shop.models import Shop
+from forecast.models import Forecast
 
-init_logger("parse_shops")
-logger = logging.getLogger("parse_shops")
+init_logger("parse_forecast")
+logger = logging.getLogger("parse_forecast")
 
-file_name = "st_df.csv"
+file_name = "sales_submission.csv"
 
 
 class Command(BaseCommand):
@@ -30,7 +32,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        models = [Shop, City, Division, Format, Location, Size]
+        models = [Forecast, Shop, Product]
 
         if options[settings.OPTIONS_DELETE]:
             for model in models:
@@ -54,19 +56,12 @@ class Command(BaseCommand):
                 next(reader)
 
                 for row in reader:
-                    city = City.objects.get_or_create(name=row[1])[0]
-                    division = Division.objects.get_or_create(name=row[2])[0]
-                    type_format = Format.objects.get_or_create(name=row[3])[0]
-                    loc = Location.objects.get_or_create(name=row[4])[0]
-                    size = Size.objects.get_or_create(name=row[5])[0]
-                    Shop.objects.get_or_create(
-                        name=row[0],
-                        city=city,
-                        division=division,
-                        type_format=type_format,
-                        loc=loc,
-                        size=size,
-                        is_active=row[6],
+                    shop = Shop.objects.get_or_create(name=row[0])[0]
+                    product = Product.objects.get_or_create(name=row[1])[0]
+                    Forecast.objects.get_or_create(
+                        shop=shop,
+                        product=product,
+                        forecast_date=row[2],
+                        forecast=row[3],
                     )
-
             logger.info(settings.DATA_LOAD_IN_FILE.format(file_name))
