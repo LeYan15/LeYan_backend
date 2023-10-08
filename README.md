@@ -1,7 +1,5 @@
 ![leyan_workflow](https://github.com/LeYan15/LeYan_backend/actions/workflows/leyan_workflow.yml/badge.svg)
 
-# LeYan - проект в рамках Хакатона Ленты и Практикума
-
 ## Описание проекта
 Интерфейс прогноза спроса на 14 дней для товаров собственного производства с использованием гранулярности ТК-SKU-День.
 
