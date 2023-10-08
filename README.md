@@ -68,6 +68,9 @@
 
     * Создайте миграции
         ```sh
+        python backend/manage.py makemigrations user
+        ```
+        ```sh
         python backend/manage.py makemigrations shop
         ```
 
