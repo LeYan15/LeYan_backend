@@ -29,11 +29,4 @@ jobs:
         echo '    I005' >> setup.cfg
         echo 'per-file-ignores =' >> setup.cfg
         echo '    */settings.py:E501' >> setup.cfg
-        echo 'exclude =' >> setup.cfg
-        echo '    */migrations/' >> setup.cfg
-        echo '    **/migrations/*' >> setup.cfg
-        echo '    **/migrations/**' >> setup.cfg
-        echo '    !**/migrations' >> setup.cfg
-        echo '    !**/migrations/__init__.py' >> setup.cfg
-        echo '    !**/migrations/0001_initial.py' >> setup.cfg
         python -m flake8
