@@ -58,7 +58,7 @@ class Command(BaseCommand):
                 next(reader)
 
                 for row in reader:
-                    shop = Shop.objects.get(shop=row[0])
+                    shop = Shop.objects.get(name=row[0])
                     sku = Product.objects.get(sku=row[1])
                     Sale.objects.get_or_create(
                         shop=shop,

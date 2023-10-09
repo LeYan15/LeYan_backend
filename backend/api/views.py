@@ -3,8 +3,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from api.filters import ProductFilter, ShopFilter
-
-# , UserFilter
 from api.paginations import LimitPageNumberPagination
 from api.serializers import (
     ForecastSerializer,

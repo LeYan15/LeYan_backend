@@ -14,7 +14,7 @@ def password_filter(log: logging.LogRecord) -> int:
 def create_file_log(file):
     if not os.path.isdir(settings.LOG_DIR):
         os.mkdir(settings.LOG_DIR)
-        os.open(settings.LOG_FILE, flags=os.O_CREAT)
+    os.open(settings.LOG_FILE, flags=os.O_CREAT)
     return file
 
 

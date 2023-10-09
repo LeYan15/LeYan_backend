@@ -8,7 +8,7 @@ from model import forecast
 from config import settings
 
 api_port = os.environ.get("API_PORT", "8000")
-api_host = os.environ.get("API_PORT", "localhost")
+api_host = os.environ.get("API_HOST", "localhost")
 
 _logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def get_address(resource):
 def get_stores():
     stores_url = get_address(settings.URL_STORES)
     resp = requests.get(stores_url)
-    if resp.status_code != 200:
+    if resp.status_code != HTTPStatus.OK:
         _logger.warning("Could not get stores list")
         return []
     return resp.json()["data"]
@@ -59,7 +59,7 @@ def get_categs_info():
 
 
 def main(today=date.today()):
-    forecast_dates = [today + timedelta(days=d) for d in range(1, 6)]
+    forecast_dates = [today + timedelta(days=d) for d in range(1, 14)]
     forecast_dates = [el.strftime(settings.DATA) for el in forecast_dates]
     categs_info = get_categs_info()
     for store in get_stores():
