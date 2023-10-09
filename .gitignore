@@ -180,7 +180,7 @@ migrations/
 
 # Static
 
-static/
-/static/
-**/static/*
-**/static/**
+#static/
+#/static/
+#**/static/*
+#**/static/**
