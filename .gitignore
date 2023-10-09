@@ -176,3 +176,10 @@ migrations/
 !**/migrations/0001_initial.py
 !**/migrations/__init__
 !**/migrations/0001_initial
+
+
+# Static
+
+static/
+**/static/*
+**/static/**

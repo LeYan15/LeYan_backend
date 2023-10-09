@@ -25,10 +25,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -37,18 +34,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "debug_toolbar",  # isort:ignore
     "api.apps.ApiConfig",
     "product.apps.ProductConfig",
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
-    # "shop.apps.ShopConfig",
-    "shop",
+    "shop.apps.ShopConfig",
     "user.apps.UserConfig",
     "rest_framework",  # isort:ignore
     "rest_framework.authtoken",  # isort:ignore
     "djoser",  # isort:ignore
     "django_filters",  # isort:ignore
-    "debug_toolbar",  # isort:ignore
     "drf_yasg",  # isort:ignore
 ]
 
@@ -68,6 +64,7 @@ ROOT_URLCONF = "leyan.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        # "DIRS": [os.path.join(BASE_DIR, "templates")],
         "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -92,10 +89,10 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER", default="postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
         "HOST": os.getenv(
+            # "DB_HOST", default="localhost"
             "DB_HOST",
-            default="localhost"
-            # "DB_HOST", default="db"
-        ),  # потом надо не забыть поменять на db
+            default="db",
+        ),
         "PORT": os.getenv("DB_PORT", default="5432"),
     }
 }
@@ -121,9 +118,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = "static_admin/"
+STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_admin")]
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -163,6 +159,9 @@ DJOSER = {
 }
 
 AUTH_USER_MODEL = "user.User"
+
+# Адрес для работы debug_toolbar
+INTERNAL_IPS = ["localhost", "127.0.0.1", "backend"]
 
 
 # Константы----------------------------
