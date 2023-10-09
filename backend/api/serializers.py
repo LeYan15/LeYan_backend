@@ -17,11 +17,16 @@ class ProductSerializer(serializers.ModelSerializer):
 class SaleSerializer(serializers.ModelSerializer):
     shop = serializers.ReadOnlyField(source="shop.name")
     sku = serializers.ReadOnlyField(source="product.sku")
-    fact = serializers.SerializerMethodField()
+    fact = serializers.SerializerMethodField(method_name="get_fact")
 
     class Meta:
         model = Sale
         fields = "__all__"
+
+    def get_fact(
+        self,
+    ):
+        pass
 
 
 class ShopSerializer(serializers.ModelSerializer):
