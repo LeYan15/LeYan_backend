@@ -8,7 +8,7 @@ from model import forecast
 from config import settings
 
 api_port = os.environ.get("API_PORT", "8000")
-api_host = os.environ.get("API_HOST", "localhost")
+api_host = os.environ.get("API_HOST", "127.0.0.1")
 
 _logger = logging.getLogger(__name__)
 
@@ -23,23 +23,23 @@ def setup_logging():
 
 
 def get_address(resource):
-    return "http://" + api_host + ":" + api_port + "/" + resource
+    return f"http://{api_host}:{api_port}/api/{resource}"
 
 
-def get_stores():
-    stores_url = get_address(settings.URL_STORES)
-    resp = requests.get(stores_url)
+def get_shops():
+    shops_url = get_address(settings.URL_SHOPS)
+    resp = requests.get(shops_url)
     if resp.status_code != HTTPStatus.OK:
-        _logger.warning("Could not get stores list")
+        _logger.warning("Could not get shops list")
         return []
-    return resp.json()["data"]
+    return resp.json()["results"]
 
 
-def get_sales(store=None, sku=None):
+def get_sales(shop=None, sku=None):
     sale_url = get_address(settings.URL_SALES)
     params = {}
-    if store is not None:
-        params["store"] = store
+    if shop is not None:
+        params["name"] = shop
     if sku is not None:
         params["sku"] = sku
     resp = requests.get(sale_url, params=params)
@@ -49,7 +49,7 @@ def get_sales(store=None, sku=None):
     return resp.json()["data"]
 
 
-def get_categs_info():
+def get_product_info():
     categs_url = get_address(settings.URL_CATEGORIES)
     resp = requests.get(categs_url)
     if resp.status_code != HTTPStatus.OK:
@@ -61,16 +61,16 @@ def get_categs_info():
 def main(today=date.today()):
     forecast_dates = [today + timedelta(days=d) for d in range(1, 14)]
     forecast_dates = [el.strftime(settings.DATA) for el in forecast_dates]
-    categs_info = get_categs_info()
-    for store in get_stores():
+    categs_info = get_product_info()
+    for shop in get_shops():
         result = []
-        for item in get_sales(store=store["store"]):
+        for item in get_sales(shop=shop["name"]):
             item_info = categs_info[item["sku"]]
             sales = item["fact"]
-            prediction = forecast(sales, item_info, store)
+            prediction = forecast(sales, item_info, shop)
             result.append(
                 {
-                    "store": store["store"],
+                    "shop": shop["shop"],
                     "forecast_date": today.strftime(settings.DATA),
                     "forecast": {
                         "sku": item["sku"],

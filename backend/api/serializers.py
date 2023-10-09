@@ -23,10 +23,8 @@ class SaleSerializer(serializers.ModelSerializer):
         model = Sale
         fields = "__all__"
 
-    def get_fact(
-        self,
-    ):
-        pass
+    def get_fact(self, data):
+        return data
 
 
 class ShopSerializer(serializers.ModelSerializer):
