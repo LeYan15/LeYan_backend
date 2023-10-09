@@ -93,6 +93,10 @@ get, /forecast # Возвращает спрогнозированные зна�
     ```sh
     docker compose -f infra/docker-compose.yaml up -d --build
     ```
+2. *Для остановки контейнера*:
+    ```sh
+    docker compose -f infra/docker-compose.yaml down
+    ```
 </details>
 
 ---
