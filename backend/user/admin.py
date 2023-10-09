@@ -19,3 +19,8 @@ class UserAdmin(admin.ModelAdmin):
         "email",
     )
     empty_value_display = "--пусто--"
+
+    class Media:
+        css = {
+            "all": ("path/to/admin.css",),
+        }
