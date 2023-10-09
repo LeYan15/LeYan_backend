@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     "product.apps.ProductConfig",
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
-    # "shop.apps.ShopConfig",
-    "shop",
+    "shop.apps.ShopConfig",
     "user.apps.UserConfig",
     "rest_framework",  # isort:ignore
     "rest_framework.authtoken",  # isort:ignore
