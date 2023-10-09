@@ -37,15 +37,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "debug_toolbar",
-    "drf_yasg",
     "api.apps.ApiConfig",
     "product.apps.ProductConfig",
     "forecast.apps.ForecastConfig",
     "sale.apps.SaleConfig",
-    "shop.apps.ShopConfig",
+    # "shop.apps.ShopConfig",
+    "shop",
     "user.apps.UserConfig",
+    "rest_framework",  # isort:ignore
+    "rest_framework.authtoken",  # isort:ignore
+    "djoser",  # isort:ignore
+    "django_filters",  # isort:ignore
+    "debug_toolbar",  # isort:ignore
+    "drf_yasg",  # isort:ignore
 ]
 
 MIDDLEWARE = [
@@ -88,13 +92,13 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER", default="postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
         "HOST": os.getenv(
-            "DB_HOST", default="localhost"
+            "DB_HOST",
+            default="localhost"
+            # "DB_HOST", default="db"
         ),  # потом надо не забыть поменять на db
         "PORT": os.getenv("DB_PORT", default="5432"),
     }
 }
-
-AUTH_USER_MODEL = "user.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -124,6 +128,40 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ),
+}
+
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "SEND_ACTIVATION_EMAIL": False,
+    "HIDE_USERS": False,
+    "PERMISSIONS": {
+        "user": ["djoser.permissions.CurrentUserOrAdminOrReadOnly"],
+        "user_list": ["rest_framework.permissions.AllowAny"],
+    },
+    "SERIALIZERS": {
+        "user": "api.serializers.UserSerializer",
+        "current_user": "api.serializers.UserSerializer",
+        "user_create": "djoser.serializers.UserCreateSerializer",
+    },
+}
+
+AUTH_USER_MODEL = "user.User"
 
 
 # Константы----------------------------
@@ -161,8 +199,7 @@ OPTIONS_DELETE = "delete"
 
 # Логгер
 LOG_FORMAT = "%(asctime)s :: %(name)s:%(lineno)s - %(levelname)s - %(message)s"
-LOG_FILE = "backend/api/logs/file.log"
-LOG_DIR = "backend/api/logs/"
-LOG_INIT = "backend/api/logs/__init__.py"
+LOG_FILE = os.path.join(BASE_DIR / "api/logs/file.log")
+LOG_DIR = os.path.join(BASE_DIR / "api/logs")
 LOG_MESSAGE = "Custom log"
 LOG_PASS_FILTER = "password"
