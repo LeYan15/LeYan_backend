@@ -24,7 +24,7 @@ class SaleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_fact(self, data):
-        return data
+        pass
 
 
 class ShopSerializer(serializers.ModelSerializer):
