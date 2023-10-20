@@ -8,20 +8,22 @@ from shop.models import Shop
 class Sale(models.Model):
 
     shop = models.ForeignKey(
-        Shop, on_delete=models.CASCADE, related_name="sales"
+        Shop, on_delete=models.CASCADE, verbose_name="Магазин"
     )
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="sales"
+        Product, on_delete=models.CASCADE, verbose_name="Продукт"
     )
-    date = models.DateField()
-    sales_type = models.IntegerField(choices=settings.FLAG)
-    sales_units = models.IntegerField()
-    sales_units_promo = models.IntegerField()
+    date = models.DateField("Дата")
+    sales_type = models.IntegerField("Тип продажи", choices=settings.FLAG)
+    sales_units = models.IntegerField("Продажа ед.")
+    sales_units_promo = models.IntegerField("Продажа ед. промо")
     sales_rub = models.DecimalField(
+        "Продажа в руб.",
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
     )
     sales_rub_promo = models.DecimalField(
+        "Продажа в руб. промо",
         max_digits=settings.MAX_DIGITS,
         decimal_places=settings.DECIMAL_PLACES,
     )
@@ -29,3 +31,4 @@ class Sale(models.Model):
     class Meta:
         verbose_name = "Продажи"
         verbose_name_plural = "Продажи"
+        default_related_name = "sales"

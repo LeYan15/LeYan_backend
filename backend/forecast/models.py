@@ -8,13 +8,19 @@ from shop.models import Shop
 class Forecast(models.Model):
 
     shop = models.ForeignKey(
-        Shop, on_delete=models.CASCADE, related_name="forecast"
+        Shop,
+        on_delete=models.CASCADE,
+        related_name="forecast",
+        verbose_name="Магазин",
     )
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="forecast"
+        Product,
+        on_delete=models.CASCADE,
+        related_name="forecast",
+        verbose_name="Продукт",
     )
-    forecast_date = models.DateField()
-    forecast = JSONField(default=dict)
+    forecast_date = models.DateField("Дата")
+    forecast = JSONField("Предсказание", default=dict)
 
     class Meta:
         verbose_name = "Прогноз продаж"

@@ -161,7 +161,7 @@ DJOSER = {
 
 AUTH_USER_MODEL = "user.User"
 
-# Адрес для работы debug_toolbar
+# Адреса для работы debug_toolbar
 INTERNAL_IPS = ["localhost", "127.0.0.1", "backend"]
 
 
@@ -189,7 +189,7 @@ LENGTH_HELP = f"Максимум {MAX_LENGTH} символов."
 
 # Парсер
 HELP_TEXT_PARSER = "Загрузка данных из {} файла."
-DELETE_TEXT_PARSER = "Удаление данных из {} файла."
+DELETE_TEXT_PARSER = "Удаление данных {} файла."
 
 DATA_DIR = "data/{}"
 DATA_DELETE = "Данные {} удалены."

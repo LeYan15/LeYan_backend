@@ -12,7 +12,7 @@ class ProductFilter(FilterSet):
 
     class Meta:
         model = Product
-        fields = ["sku"]
+        fields = "__all__"
 
 
 class ShopFilter(FilterSet):

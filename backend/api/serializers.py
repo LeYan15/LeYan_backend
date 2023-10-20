@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from django.conf import settings
 from forecast.models import Forecast
 from product.models import Product
 from sale.models import Sale
@@ -14,17 +14,39 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class SaleSerializer(serializers.ModelSerializer):
-    shop = serializers.ReadOnlyField(source="shop.name")
-    sku = serializers.ReadOnlyField(source="product.sku")
-    fact = serializers.SerializerMethodField(method_name="get_fact")
+class FactSerializer(serializers.ModelSerializer):
+    data = serializers.DateField()
+    sales_type = serializers.IntegerField()
+    sales_units = serializers.IntegerField()
+    sales_units_promo = serializers.IntegerField()
+    sales_rub = serializers.DecimalField(
+        max_digits=settings.MAX_DIGITS,
+        decimal_places=settings.DECIMAL_PLACES,
+    )
+    sales_rub_promo = serializers.DecimalField(
+        max_digits=settings.MAX_DIGITS,
+        decimal_places=settings.DECIMAL_PLACES,
+    )
 
     class Meta:
         model = Sale
-        fields = "__all__"
+        fields = (
+            "sales_type",
+            "sales_units",
+            "sales_units_promo",
+            "sales_rub",
+            "sales_rub_promo",
+        )
 
-    def get_fact(self, data):
-        pass
+
+class SaleSerializer(serializers.ModelSerializer):
+    shop = serializers.ReadOnlyField(source="shop.name")
+    sku = serializers.ReadOnlyField(source="product.sku")
+    fact = FactSerializer()
+
+    class Meta:
+        model = Sale
+        fields = ("shop", "sku", "fact")
 
 
 class ShopSerializer(serializers.ModelSerializer):
@@ -43,7 +65,7 @@ class ShopSerializer(serializers.ModelSerializer):
 class ForecastSerializer(serializers.ModelSerializer):
     shop = serializers.CharField(source="shop.name")
     sku = serializers.CharField(source="product.sku")
-    forecast = serializers.DictField(source="forecast.sales_units")
+    forecast = serializers.JSONField()
 
     class Meta:
         model = Forecast

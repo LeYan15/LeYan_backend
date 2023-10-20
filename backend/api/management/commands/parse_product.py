@@ -1,7 +1,7 @@
 import os
-import csv
 import logging
 
+import pandas as pd
 from django.conf import settings
 from django.core.management import BaseCommand
 
@@ -43,25 +43,34 @@ class Command(BaseCommand):
                     logger.info(settings.DATA_UPLOADED.format(model))
                     return
 
-            with open(
-                os.path.join(
-                    settings.BASE_DIR / settings.DATA_DIR.format(file_name)
-                ),
-                encoding="utf-8",
-            ) as csv_file:
+            file_dir = os.path.join(
+                settings.BASE_DIR / settings.DATA_DIR.format(file_name)
+            )
 
-                reader = csv.reader(csv_file, delimiter=",")
-                next(reader)
+            reader = pd.read_csv(file_dir)
 
-                for row in reader:
-                    group = Group.objects.get_or_create(name=row[1])[0]
-                    cat = Category.objects.get_or_create(name=row[2])[0]
-                    subcat = SubCategory.objects.get_or_create(name=row[3])[0]
-                    Product.objects.get_or_create(
-                        sku=row[0],
-                        group=group,
-                        category=cat,
-                        subcategory=subcat,
-                        uom=row[4],
-                    )
+            group = [
+                Group.objects.get_or_create(name=row["pr_group_id"])
+                for _, row in reader.iterrows()
+            ]
+            category = [
+                Category.objects.get_or_create(name=row["pr_cat_id"])
+                for _, row in reader.iterrows()
+            ]
+            subcategory = [
+                SubCategory.objects.get_or_create(name=row["pr_subcat_id"])
+                for _, row in reader.iterrows()
+            ]
+
+            for _, row in reader.iterrows():
+                group = group.get(name=row["pr_group_id"])
+                category = category.get(name=row["pr_cat_id"])
+                subcategory = subcategory.get(name=row["pr_subcat_id"])
+                Product.objects.get_or_create(
+                    sku=row["pr_sku_id"],
+                    group=group,
+                    category=category,
+                    subcategory=subcategory,
+                    uom=row["pr_uom_id"],
+                )
             logger.info(settings.DATA_LOAD_IN_FILE.format(file_name))

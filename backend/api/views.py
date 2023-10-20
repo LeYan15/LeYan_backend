@@ -24,7 +24,6 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
-    # pagination_class = LimitPageNumberPagination
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
@@ -46,8 +45,12 @@ class SalesViewSet(viewsets.ModelViewSet):
 
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
-    # permission_classes = (permissions.AllowAny,)
     pagination_class = LimitPageNumberPagination
+
+    # @action(detail=False, methods=["get"])
+    # def get_fact(self, ):
+    #     queryset = Fact.objects.all()
+    #     return queryset
 
 
 class ForecastViewSet(viewsets.ModelViewSet):
