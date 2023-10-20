@@ -31,6 +31,7 @@ class FactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
         fields = (
+            "data",
             "sales_type",
             "sales_units",
             "sales_units_promo",
