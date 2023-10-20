@@ -63,9 +63,9 @@ class Command(BaseCommand):
             ]
 
             for _, row in reader.iterrows():
-                group = group.get(name=row["pr_group_id"])
-                category = category.get(name=row["pr_cat_id"])
-                subcategory = subcategory.get(name=row["pr_subcat_id"])
+                group = Group.objects.get(name=row["pr_group_id"])
+                category = Category.objects.get(name=row["pr_cat_id"])
+                subcategory = SubCategory.objects.get(name=row["pr_subcat_id"])
                 Product.objects.get_or_create(
                     sku=row["pr_sku_id"],
                     group=group,

@@ -10,7 +10,7 @@ from django.core.management import BaseCommand
 from api.management.logger import init_logger
 from product.models import Product
 from shop.models import Shop
-from sale.models import Sale, Fact
+from sale.models import Sale
 
 init_logger("parse_sales")
 logger = logging.getLogger("parse_sales")
@@ -34,7 +34,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        models = [Sale, Fact]
+        models = [Sale]
 
         if options[settings.OPTIONS_DELETE]:
             for model in models:
