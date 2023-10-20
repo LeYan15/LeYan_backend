@@ -1,16 +1,13 @@
 import os
-
-# import csv
+import csv
 import logging
 
-import pandas as pd
 from django.conf import settings
 from django.core.management import BaseCommand
 
 from api.management.logger import init_logger
-from product.models import Product
-from shop.models import Shop
-from sale.models import Sale, Fact
+
+from sale.models import Fact
 
 init_logger("parse_sales")
 logger = logging.getLogger("parse_sales")
@@ -34,7 +31,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        models = [Sale, Fact]
+        models = [Fact]
 
         if options[settings.OPTIONS_DELETE]:
             for model in models:
@@ -47,24 +44,27 @@ class Command(BaseCommand):
                     logger.info(settings.DATA_UPLOADED.format(model))
                     return
 
-                file_dir = os.path.join(
+            with open(
+                os.path.join(
                     settings.BASE_DIR / settings.DATA_DIR.format(file_name)
-                )
+                ),
+                encoding="utf-8",
+            ) as csv_file:
 
-                reader = pd.read_csv(file_dir)
-                for _, row in reader.iterrows():
-                    shop = Shop.objects.get(name=row["st_id"])
-                    sku = Product.objects.get(sku=row["pr_sku_id"])
-                    Sale.objects.get_or_create(
-                        shop=shop,
-                        product=sku,
-                        date=row["date"],
-                        sales_type=row["pr_sales_type_id"],
-                        sales_units=float(row["pr_sales_in_units"]),
-                        sales_units_promo=float(
-                            row["pr_promo_sales_in_units"]
-                        ),
-                        sales_rub=row["pr_sales_in_rub"],
-                        sales_rub_promo=row["pr_promo_sales_in_rub"],
-                    )
+                reader = csv.reader(csv_file, delimiter=",")
+                next(reader)
+
+                for row in reader:
+                    try:
+                        Fact.objects.get_or_create(
+                            date=row[2],
+                            sales_type=row[3],
+                            sales_units=float(row[4]),
+                            sales_units_promo=float(row[5]),
+                            sales_rub=row[6],
+                            sales_rub_promo=row[7],
+                        )
+                    except Exception:
+                        logger.exception("Данные не выгружены")
+
             logger.info(settings.DATA_LOAD_IN_FILE.format(file_name))

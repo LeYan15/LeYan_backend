@@ -16,5 +16,8 @@ class SaleAdmin(admin.ModelAdmin):
         "sales_rub",
         "sales_rub_promo",
     )
-    search_fields = ("shop", "product", "date", "sales_type")
+    search_fields = (
+        "shop",
+        "product",
+    )
     empty_value_display = "--пусто--"

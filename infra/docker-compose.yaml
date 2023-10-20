@@ -19,13 +19,12 @@ services:
     ports:
      - "8000:8000"
     command: >
-      bash -c "python manage.py migrate &&
-      python manage.py makemigrations &&
+      bash -c "python manage.py makemigrations user &&
+      python manage.py migrate &&
       python manage.py makemigrations product &&
       python manage.py makemigrations shop &&
       python manage.py makemigrations sale &&
       python manage.py makemigrations forecast &&
-      python manage.py makemigrations user &&
       python manage.py migrate &&
       python manage.py parse_shops &&
       python manage.py parse_product &&

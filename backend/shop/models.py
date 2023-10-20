@@ -4,7 +4,7 @@ from django.db import models
 
 class NameCharModel(models.Model):
 
-    name = models.CharField(max_length=settings.MAX_LENGTH)
+    name = models.CharField("Название", max_length=settings.MAX_LENGTH)
 
     class Meta:
         abstract = True
@@ -30,34 +30,25 @@ class Division(NameCharModel):
 
 class NameIntModel(models.Model):
 
-    name = models.IntegerField()
+    name = models.IntegerField("Название")
 
     class Meta:
         abstract = True
 
 
 class Format(NameIntModel):
-
-    name = models.IntegerField()
-
     class Meta:
         verbose_name = "Формат"
         verbose_name_plural = "Форматы"
 
 
 class Location(NameIntModel):
-
-    name = models.IntegerField()
-
     class Meta:
         verbose_name = "Локация"
         verbose_name_plural = "Локации"
 
 
 class Size(NameIntModel):
-
-    name = models.IntegerField()
-
     class Meta:
         verbose_name = "Размер"
         verbose_name_plural = "Размеры"
@@ -66,21 +57,41 @@ class Size(NameIntModel):
 class Shop(NameCharModel):
 
     city = models.ForeignKey(
-        City, on_delete=models.SET_NULL, related_name="shops", null=True
+        City,
+        on_delete=models.SET_NULL,
+        related_name="shops",
+        null=True,
+        verbose_name="Город",
     )
     division = models.ForeignKey(
-        Division, on_delete=models.SET_NULL, related_name="shops", null=True
+        Division,
+        on_delete=models.SET_NULL,
+        related_name="shops",
+        null=True,
+        verbose_name="Подразделение",
     )
     type_format = models.ForeignKey(
-        Format, on_delete=models.SET_NULL, related_name="shops", null=True
+        Format,
+        on_delete=models.SET_NULL,
+        related_name="shops",
+        null=True,
+        verbose_name="Формат",
     )
     loc = models.ForeignKey(
-        Location, on_delete=models.SET_NULL, related_name="shops", null=True
+        Location,
+        on_delete=models.SET_NULL,
+        related_name="shops",
+        null=True,
+        verbose_name="Локация",
     )
     size = models.ForeignKey(
-        Size, on_delete=models.SET_NULL, related_name="shops", null=True
+        Size,
+        on_delete=models.SET_NULL,
+        related_name="shops",
+        null=True,
+        verbose_name="Размер",
     )
-    is_active = models.IntegerField(choices=settings.FLAG)
+    is_active = models.IntegerField("Активен", choices=settings.FLAG)
 
     class Meta:
         verbose_name = "Магазин"

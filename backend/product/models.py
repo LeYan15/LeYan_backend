@@ -4,7 +4,9 @@ from django.db import models
 
 class NameModel(models.Model):
 
-    name = models.CharField(max_length=settings.MAX_LENGTH, primary_key=True)
+    name = models.CharField(
+        "Название", max_length=settings.MAX_LENGTH, primary_key=True
+    )
 
     class Meta:
         abstract = True
@@ -37,16 +39,25 @@ class Product(models.Model):
         "Артикул", max_length=settings.MAX_LENGTH, primary_key=True
     )
     group = models.ForeignKey(
-        Group, on_delete=models.SET_NULL, related_name="product", null=True
+        Group,
+        on_delete=models.CASCADE,
+        related_name="product",
+        null=True,
+        verbose_name="Продукт",
     )
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, related_name="product", null=True
+        Category,
+        on_delete=models.CASCADE,
+        related_name="product",
+        null=True,
+        verbose_name="Категория",
     )
     subcategory = models.ForeignKey(
         SubCategory,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name="product",
         null=True,
+        verbose_name="Подкатегория",
     )
     uom = models.IntegerField("Ед. изм.", choices=settings.UOM)
 
