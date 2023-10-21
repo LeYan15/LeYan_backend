@@ -35,9 +35,7 @@ class SubCategory(NameModel):
 
 class Product(models.Model):
 
-    sku = models.CharField(
-        "Артикул", max_length=settings.MAX_LENGTH, primary_key=True
-    )
+    sku = models.CharField("Артикул", max_length=settings.MAX_LENGTH, primary_key=True)
     group = models.ForeignKey(
         Group,
         on_delete=models.CASCADE,

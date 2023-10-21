@@ -1,12 +1,8 @@
-from rest_framework import permissions, viewsets, status
-from rest_framework.decorators import action
-from rest_framework.response import Response
-
 from api.filters import ProductFilter, ShopFilter
 from api.paginations import LimitPageNumberPagination
 from api.serializers import (
-    ForecastSerializer,
     ForecastCreateSerializer,
+    ForecastSerializer,
     ProductSerializer,
     SaleSerializer,
     ShopSerializer,
@@ -14,9 +10,11 @@ from api.serializers import (
 )
 from forecast.models import Forecast
 from product.models import Product
+from rest_framework import permissions, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from sale.models import Sale
 from shop.models import Shop
-
 from user.models import User
 
 

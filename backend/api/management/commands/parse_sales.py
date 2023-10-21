@@ -1,16 +1,14 @@
-import os
-
 # import csv
 import logging
+import os
 
 import pandas as pd
+from api.management.logger import init_logger
 from django.conf import settings
 from django.core.management import BaseCommand
-
-from api.management.logger import init_logger
 from product.models import Product
-from shop.models import Shop
 from sale.models import Sale
+from shop.models import Shop
 
 init_logger("parse_sales")
 logger = logging.getLogger("parse_sales")
@@ -61,9 +59,7 @@ class Command(BaseCommand):
                         date=row["date"],
                         sales_type=row["pr_sales_type_id"],
                         sales_units=float(row["pr_sales_in_units"]),
-                        sales_units_promo=float(
-                            row["pr_promo_sales_in_units"]
-                        ),
+                        sales_units_promo=float(row["pr_promo_sales_in_units"]),
                         sales_rub=row["pr_sales_in_rub"],
                         sales_rub_promo=row["pr_promo_sales_in_rub"],
                     )

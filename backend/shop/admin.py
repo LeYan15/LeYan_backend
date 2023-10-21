@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from shop.models import City, Division, Format, Location, Shop, Size
 
 

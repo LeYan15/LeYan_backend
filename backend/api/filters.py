@@ -1,7 +1,6 @@
 from django_filters.rest_framework import FilterSet, filters
-
-from product.models import Product, Group, Category, SubCategory
-from shop.models import Shop, City
+from product.models import Category, Group, Product, SubCategory
+from shop.models import City, Shop
 
 
 class ProductFilter(FilterSet):

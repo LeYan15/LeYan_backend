@@ -6,9 +6,9 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
-# from django.utils.translation import gettext_lazy as _
-
 from .validators import username_validator
+
+# from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
@@ -76,9 +76,7 @@ class User(AbstractUser):
 
     @classmethod
     def normalize_email(cls, email: str):
-        if not isinstance(email, str) or not re.match(
-            settings.MAIL_VALID, email
-        ):
+        if not isinstance(email, str) or not re.match(settings.MAIL_VALID, email):
             raise ValueError(settings.MAIL_ERROR.format(email))
         email_name, domain_part = email.strip().rsplit("@", 1)
         return email_name.lower() + "@" + domain_part.lower()

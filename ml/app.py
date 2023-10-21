@@ -1,11 +1,11 @@
-import requests
-import os
 import logging
-from http import HTTPStatus
+import os
 from datetime import date, timedelta
+from http import HTTPStatus
 
-from model import forecast
+import requests
 from config import settings
+from model import forecast
 
 api_port = os.environ.get("API_PORT", "8000")
 api_host = os.environ.get("API_HOST", "127.0.0.1")
@@ -80,9 +80,7 @@ def main(today=date.today()):
                     },
                 }
             )
-        requests.post(
-            get_address(settings.URL_FORECAST), json={"data": result}
-        )
+        requests.post(get_address(settings.URL_FORECAST), json={"data": result})
 
 
 if __name__ == "__main__":

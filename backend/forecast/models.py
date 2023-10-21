@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import JSONField
-
 from product.models import Product
 from shop.models import Shop
 
@@ -37,7 +36,4 @@ class Forecast(models.Model):
         ]
 
     def __str__(self):
-        return (
-            f"Прогноз для {self.shop}: {self.product}. "
-            f"От {self.forecast_date}."
-        )
+        return f"Прогноз для {self.shop}: {self.product}. " f"От {self.forecast_date}."

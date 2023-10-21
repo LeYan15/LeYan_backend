@@ -1,10 +1,9 @@
-from rest_framework import serializers
 from django.conf import settings
 from forecast.models import Forecast
 from product.models import Product
+from rest_framework import serializers
 from sale.models import Sale
 from shop.models import Shop
-
 from user.models import User
 
 

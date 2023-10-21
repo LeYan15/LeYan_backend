@@ -1,11 +1,10 @@
-import os
 import csv
 import logging
-
-from django.conf import settings
-from django.core.management import BaseCommand
+import os
 
 from api.management.logger import init_logger
+from django.conf import settings
+from django.core.management import BaseCommand
 from shop.models import City, Division, Format, Location, Shop, Size
 
 init_logger("parse_shops")
@@ -44,9 +43,7 @@ class Command(BaseCommand):
                     return
 
             with open(
-                os.path.join(
-                    settings.BASE_DIR / settings.DATA_DIR.format(file_name)
-                ),
+                os.path.join(settings.BASE_DIR / settings.DATA_DIR.format(file_name)),
                 encoding="utf-8",
             ) as csv_file:
 

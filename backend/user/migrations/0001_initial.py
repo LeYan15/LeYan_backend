@@ -2,9 +2,9 @@
 
 import django.contrib.auth.models
 import django.core.validators
-from django.db import migrations, models
 import django.utils.timezone
 import user.validators
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -111,15 +111,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_active",
-                    models.BooleanField(
-                        default=True, verbose_name="Активирован"
-                    ),
+                    models.BooleanField(default=True, verbose_name="Активирован"),
                 ),
                 (
                     "is_superuser",
-                    models.BooleanField(
-                        default=True, verbose_name="Суперюзер"
-                    ),
+                    models.BooleanField(default=True, verbose_name="Суперюзер"),
                 ),
                 (
                     "groups",

@@ -1,12 +1,11 @@
-import os
 import logging
+import os
 
 import pandas as pd
+from api.management.logger import init_logger
 from django.conf import settings
 from django.core.management import BaseCommand
-
-from api.management.logger import init_logger
-from product.models import Product, Group, Category, SubCategory
+from product.models import Category, Group, Product, SubCategory
 
 init_logger("parse_product")
 logger = logging.getLogger("parse_product")
