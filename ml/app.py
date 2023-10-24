@@ -80,7 +80,9 @@ def main(today=date.today()):
                     },
                 }
             )
-        requests.post(get_address(settings.URL_FORECAST), json={"data": result})
+        requests.post(
+            get_address(settings.URL_FORECAST), json={"data": result}
+        )
 
 
 if __name__ == "__main__":

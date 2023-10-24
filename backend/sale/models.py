@@ -6,7 +6,9 @@ from shop.models import Shop
 
 class Sale(models.Model):
 
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, verbose_name="Магазин")
+    shop = models.ForeignKey(
+        Shop, on_delete=models.CASCADE, verbose_name="Магазин"
+    )
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name="Продукт"
     )

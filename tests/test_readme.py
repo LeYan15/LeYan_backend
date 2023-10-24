@@ -1,7 +1,7 @@
 import os
 import re
 
-from .conftest import root_dir
+from tests.conftest import root_dir
 
 
 class TestReadme:

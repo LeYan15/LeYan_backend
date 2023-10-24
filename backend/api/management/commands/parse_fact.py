@@ -43,7 +43,9 @@ class Command(BaseCommand):
                     return
 
             with open(
-                os.path.join(settings.BASE_DIR / settings.DATA_DIR.format(file_name)),
+                os.path.join(
+                    settings.BASE_DIR / settings.DATA_DIR.format(file_name)
+                ),
                 encoding="utf-8",
             ) as csv_file:
 

@@ -36,4 +36,5 @@ class Forecast(models.Model):
         ]
 
     def __str__(self):
-        return f"Прогноз для {self.shop}: {self.product}. " f"От {self.forecast_date}."
+        return f"Прогноз для {self.shop}: {self.product}. " \
+               f"От {self.forecast_date}."

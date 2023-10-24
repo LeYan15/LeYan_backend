@@ -59,7 +59,9 @@ class Command(BaseCommand):
                         date=row["date"],
                         sales_type=row["pr_sales_type_id"],
                         sales_units=float(row["pr_sales_in_units"]),
-                        sales_units_promo=float(row["pr_promo_sales_in_units"]),
+                        sales_units_promo=float(
+                            row["pr_promo_sales_in_units"]
+                        ),
                         sales_rub=row["pr_sales_in_rub"],
                         sales_rub_promo=row["pr_promo_sales_in_rub"],
                     )

@@ -1,7 +1,7 @@
 import os
 import re
 
-from .conftest import infra_dir_path, root_dir
+from tests.conftest import infra_dir_path, root_dir
 
 
 class TestDockerfileCompose:
